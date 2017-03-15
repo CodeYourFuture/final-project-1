@@ -12,6 +12,7 @@
   "dependencies": {
     "concurrently": "^3.4.0",
     "express": "^4.15.2",
+    "mongoose": "^4.9.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   },
@@ -28,6 +29,9 @@
       "es2015",
       "stage-0"
     ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "proxy": "http://localhost:3001"
 }

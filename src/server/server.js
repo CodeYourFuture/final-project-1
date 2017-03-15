@@ -1,4 +1,7 @@
 import express from 'express'
+import mongoose from 'mongoose'
+
+mongoose.connect('mongodb://localhost/rams_projects');
 
 const app = express();
 
