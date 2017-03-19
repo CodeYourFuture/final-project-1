@@ -30,7 +30,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "start:server": "nodemon server/server.js --exec babel-node",
-    "start:all": "concurrently \"npm run server\" \"npm run start\""
+    "start:all": "concurrently \"npm run start:server\" \"npm run start\""
   },
   "babel": {
     "presets": [
