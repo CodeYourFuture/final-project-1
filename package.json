@@ -6,6 +6,11 @@
     "babel-cli": "^6.24.0",
     "babel-preset-es2015": "^6.24.0",
     "babel-preset-stage-0": "^6.22.0",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb": "latest",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2 || ^4.0.0",
+    "eslint-plugin-react": "^6.9.0",
     "nodemon": "^1.11.0",
     "react-scripts": "0.9.5"
   },
@@ -20,6 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "lint": "eslint src/ server/",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "start:server": "nodemon server/server.js --exec babel-node",
@@ -32,7 +38,20 @@
     ]
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "airbnb",
+    "plugins": [
+      "jest"
+    ],
+    "env": {
+      "jest/globals": true,
+      "browser": true
+    },
+    "rules": {
+      "react/prefer-stateless-function": 0,
+      "react/jsx-filename-extension": 0,
+      "react/prop-types": 0,
+      "no-console": 0
+    }
   },
   "proxy": "http://localhost:3001"
 }

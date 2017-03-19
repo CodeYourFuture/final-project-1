@@ -6,7 +6,7 @@ import UsersPage from './pages/Users';
 
 class Routes extends Component {
   render() {
-    return(
+    return (
       <Router history={browserHistory}>
         <Route path="/" component={App}>
           <Route path="organisations/:id" component={OrganisationPage} />

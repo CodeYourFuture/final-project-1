@@ -1,5 +1,5 @@
-import express from 'express'
-import mongoose from 'mongoose'
+import express from 'express';
+import mongoose from 'mongoose';
 import path from 'path';
 
 if (process.env.MONGODB_URI) {
@@ -15,8 +15,8 @@ console.log('Connected to mongo');
 const app = express();
 
 app.get('/api', (req, res) => {
-  res.send('hello world')
-})
+  res.send('hello world');
+});
 
 
 // ********************************************************
@@ -29,7 +29,6 @@ app.use(express.static(path.resolve(__dirname, '..', 'build')));
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
 });
-
 
 
 const port = process.env.PORT ? process.env.PORT : 3001;

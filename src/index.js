@@ -5,5 +5,5 @@ import './index.css';
 
 ReactDOM.render(
   <Routes />,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
