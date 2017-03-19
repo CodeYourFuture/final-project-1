@@ -4,7 +4,7 @@ Final Project
 # Requirements
 
 - Node
-- [MongoDB](https://www.mongodb.com/) (Using [Mongoose for ORM](http://mongoosejs.com/)
+- [MongoDB](https://www.mongodb.com/) (Using [Mongoose for ORM](http://mongoosejs.com/))
 
 To install all the dependencies run
 
