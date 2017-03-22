@@ -1,4 +1,3 @@
-// grab the things we need
 
 import mongoose from 'mongoose';
 
@@ -20,8 +19,7 @@ const organisationSchema = new Schema({
 
 const mainSchema = new Schema({
   data: [organisationSchema],
-}, { versionKey: false});
-
+}, { versionKey: false });
 
 // the schema is useless so far
 // we need to create a model using it
