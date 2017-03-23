@@ -1,8 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import path from 'path';
-import organisationFile from '../data/organisation.json';
-import Organisation from './initialSchema';
+import organisationData from './migrateData';
 
 if (process.env.MONGODB_URI) {
   console.log('Connecting to remote mongo instance');
@@ -17,13 +16,11 @@ console.log('Connected to mongo');
 const app = express();
 
 app.get('/api', (req, res) => {
-  const newOrganisation = new Organisation(organisationFile);
-  newOrganisation.save((err, data) => {
+  organisationData.save((err, result) => {
     if (err) throw err;
-    res.json(data);
+    res.json(result);
   });
 });
-
 
 // ********************************************************
 // ********************Production**************************
