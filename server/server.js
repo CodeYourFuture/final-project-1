@@ -1,7 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import path from 'path';
-import organisationData from './migrateData';
+import allOrganisationData from './migrateData';
+import orgSchema from './initialSchema';
 
 if (process.env.MONGODB_URI) {
   console.log('Connecting to remote mongo instance');
@@ -16,11 +17,19 @@ console.log('Connected to mongo');
 const app = express();
 
 app.get('/api', (req, res) => {
-  organisationData.save((err, result) => {
+  allOrganisationData.save((err, data) => {
     if (err) throw err;
-    res.json(result);
+    res.json(data);
   });
 });
+
+app.get('/api/org', (req, res) => orgSchema.find((error, organisation) => {
+  if (error) {
+    throw error;
+  } else {
+    return res.send(organisation);
+  }
+}));
 
 // ********************************************************
 // ********************Production**************************
@@ -32,7 +41,6 @@ app.use(express.static(path.resolve(__dirname, '..', 'build')));
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
 });
-
 
 const port = process.env.PORT ? process.env.PORT : 3001;
 
