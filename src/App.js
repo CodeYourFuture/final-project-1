@@ -14,6 +14,34 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
 
+        <div className="Sidebar">
+          <h3 className="Sidebar-title"><a href="#">Organisations</a></h3>
+            <div className="Sidebar-link">
+              <p><a href="#">Debt</a></p>
+              <p><a href="#">YP Families</a></p>
+              <p><a href="#">Women DV</a></p>
+              <p><a href="#">Trafﬁcking</a></p>
+              <p><a href="#">Destitution</a></p>
+              <p><a href="#">Mental Health Services</a></p>
+              <p><a href="#">Healthcare</a></p>
+              <p><a href="#">Debt</a></p>
+              <p><a href="#">YP Families</a></p>
+              <p><a href="#">Women DV</a></p>
+              <p><a href="#">Trafﬁcking</a></p>
+              <p><a href="#">Destitution</a></p>
+              <p><a href="#">Mental Health Services</a></p>
+              <p><a href="#">Healthcare</a></p>
+              <p><a href="#">Debt</a></p>
+              <p><a href="#">YP Families</a></p>
+              <p><a href="#">Women DV</a></p>
+              <p><a href="#">Trafﬁcking</a></p>
+              <p><a href="#">Destitution</a></p>
+              <p><a href="#">Mental Health Services</a></p>
+              <p><a href="#">Healthcare</a></p>
+            </div>
+          <h3 className="Sidebar-title"><a href="#">Users</a></h3>
+        </div>
+
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
