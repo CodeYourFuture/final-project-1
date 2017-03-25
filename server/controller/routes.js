@@ -19,4 +19,8 @@ module.exports = {
     const organisations = clientRequest.getOrganisation(categoryName);
     organisations.then(organisation => res.status(200).json({ data: organisation }));
   },
+  getUsers(req, res) {
+    const allUsers = clientRequest.getUsers();
+    allUsers.then(users => res.status(200).json({ data: users }));
+  },
 };

@@ -26,7 +26,7 @@ app.get('/api/migrate', routes.getImport);
 app.get('/api/all/organisation', routes.getAll);
 app.get('/api/organisation/category', routes.getCategory);
 app.get('/api/organisation/:category', routes.getOrganisation);
-
+app.get('/api/all/users', routes.getUsers);
 // ********************************************************
 // ********************Production**************************
 // ********************************************************

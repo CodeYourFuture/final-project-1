@@ -20,7 +20,7 @@ const User = new Schema({
   userName: String,
   Email: String,
   Role: String,
-});
+}, { versionKey: false });
 
 const Users = mongoose.model('User', User);
 const Organisation = mongoose.model('organisation', organisationSchema);

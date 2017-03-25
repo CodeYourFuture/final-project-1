@@ -1,11 +1,17 @@
 import path from 'path';
 import fs from 'fs';
-import OrganisationSchema from './onlyOrg';
+import OrganisationSchema from './organisationSchema';
 
 const migrateData = () => {
   const importedFilePath = path.resolve(__dirname, '..', '../data', 'organisation.json');
   const importedData = fs.readFileSync(importedFilePath);
   let orgaisationModel;
+  const userModel = new OrganisationSchema.User({
+    userName: 'Robot',
+    Email: 'user@gmail.com',
+    Role: 'Administrator',
+  });
+  userModel.save();
   return JSON.parse(importedData).map((organisation) => {
     orgaisationModel = new OrganisationSchema.AllOrganization(organisation);
     orgaisationModel.save((error) => {
@@ -29,6 +35,10 @@ const allOrganisation = () =>
 getData(OrganisationSchema.AllOrganization.find()
 .select('-_id'));
 
+const users = () =>
+getData(OrganisationSchema.User.find()
+.select('-_id'));
+
 const categories = () =>
 OrganisationSchema.AllOrganization.distinct('Catagory');
 
@@ -39,6 +49,7 @@ getData(OrganisationSchema.AllOrganization.find({ Catagory: catagoryName })
 module.exports = {
   getImport: migrateData,
   getAllOrganisation: allOrganisation,
+  getUsers: users,
   getCategories: categories,
   getOrganisation: organisation,
 };
