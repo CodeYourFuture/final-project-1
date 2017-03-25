@@ -12,7 +12,7 @@ const organisationSchema = new Schema({
   Website: String,
   Tel: [],
   Process: [],
-  Postcode: [],
+  Postcode: String,
   Services: String,
   Borough: String,
 }, { versionKey: false });
@@ -23,7 +23,7 @@ const mainSchema = new Schema({
 
 // the schema is useless so far
 // we need to create a model using it
-const organisation = mongoose.model('organisation', mainSchema);
+const organisation = mongoose.model('allOrg', mainSchema);
 
 // make this available to our organisation in our Node applications
 module.exports = organisation;

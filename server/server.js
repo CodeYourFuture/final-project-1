@@ -1,8 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
 import path from 'path';
-import allOrganisationData from './migrateData';
-import orgSchema from './initialSchema';
+import routes from './controller/routes';
+import migrateData from './lib/migrateData';
 
 if (process.env.MONGODB_URI) {
   console.log('Connecting to remote mongo instance');
@@ -16,20 +17,19 @@ console.log('Connected to mongo');
 
 const app = express();
 
-app.get('/api', (req, res) => {
-  allOrganisationData.save((err, data) => {
-    if (err) throw err;
-    res.json(data);
-  });
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.set('views', path.join(process.cwd(), 'views'));
+app.set('view engine', 'hbs');
+
+app.get('/api/migrate', (req, res) => {
+  res.status(200).json(migrateData);
 });
 
-app.get('/api/org', (req, res) => orgSchema.find((error, organisation) => {
-  if (error) {
-    throw error;
-  } else {
-    return res.send(organisation);
-  }
-}));
+app.get('/api/all/organisation', routes.getAll);
+app.get('/api/organisation/category', routes.getCategory);
+app.get('/api/organisation/:category', routes.getOrganisation);
 
 // ********************************************************
 // ********************Production**************************
