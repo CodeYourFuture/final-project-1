@@ -6,29 +6,8 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  width: auto;
-  padding: 20px;
-  color: white;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 .Sidebar{
+  margin-top: -17px;
   float: left;
   width: 20%;
   min-height: 100%;
@@ -36,6 +15,55 @@
 }
 
 .HBFLogoSidebar{
-  width: 80%;
-  height: 80%;
+  width: 60%;
+  height: 60%;
+  text-align: left;
+  padding-top: 20px;
+  margin-left: -65px;
+  margin-top: 30px;
+  margin-bottom: 5px;
+}
+
+.Sidebar-title{
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: #f5f0f0;
+  text-align: left;
+  margin-left: 20px;
+}
+
+.Sidebar-title>a, .Sidebar-link>p>a {
+  color: #f5f0f0;
+  text-decoration: none;
+}
+
+.Sidebar-link{
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: #f5f0f0;
+  text-align: left;
+  margin-left: 20px;
+  line-height: 70%;
+}
+
+.Sidebar-title>a:hover{ 
+  color: #89d3d3;
+}
+
+.Sidebar-link>p>a:hover{ 
+  color: #89d3d3;
+}
+
+.Sidebar-title>a:active{ 
+  color: pink;
+}
+
+.Sidebar-link>p>a:active{ 
+  color: pink;
+}
+
+li{
+  list-style-type: none;
 }

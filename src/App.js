@@ -31,9 +31,6 @@ class App extends Component {
             <p><a href="https://useless.bit.foo">YP Families</a></p>
             <p><a href="https://useless.bit.foo">Women DV</a></p>
             <p><a href="https://useless.bit.foo">Trafﬁcking</a></p>
-            <p><a href="https://useless.bit.foo">Destitution</a></p>
-            <p><a href="https://useless.bit.foo">Mental Health Services</a></p>
-            <p><a href="https://useless.bit.foo">Healthcare</a></p>
           </div>
           <h3 className="Sidebar-title"><a href="https://useless.bit.foo">Users</a></h3>
         </div>
