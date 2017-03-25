@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import logo from './logo.svg';
 import './App.css';
+import logoSidebar from '../design/assets/logo-sidebar.svg';
 
 class App extends Component {
   render() {
@@ -9,12 +9,8 @@ class App extends Component {
 
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-
         <div className="Sidebar">
+          <img src={logoSidebar} className="hbfLogo" alt="hbfLogo" />
           <h3 className="Sidebar-title"><a href="https://useless.bit.foo">Organisations</a></h3>
           <div className="Sidebar-link">
             <p><a href="https://useless.bit.foo">Debt</a></p>
