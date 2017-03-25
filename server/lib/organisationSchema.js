@@ -1,4 +1,3 @@
-
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
@@ -12,18 +11,21 @@ const organisationSchema = new Schema({
   Website: String,
   Tel: [],
   Process: [],
-  Postcode: [],
+  Postcode: String,
   Services: String,
   Borough: String,
 }, { versionKey: false });
 
-const mainSchema = new Schema({
-  data: [organisationSchema],
+const User = new Schema({
+  userName: String,
+  Email: String,
+  Role: String,
 }, { versionKey: false });
 
-// the schema is useless so far
-// we need to create a model using it
-const organisation = mongoose.model('organisation', mainSchema);
+const Users = mongoose.model('User', User);
+const Organisation = mongoose.model('organisation', organisationSchema);
 
-// make this available to our organisation in our Node applications
-module.exports = organisation;
+module.exports = {
+  AllOrganization: Organisation,
+  User: Users,
+};
