@@ -9,6 +9,7 @@ const organisationSchema = new Schema({
   Catagory: String,
   Email: String,
   Website: String,
+  Day: [],
   Tel: [],
   Process: [],
   Postcode: String,

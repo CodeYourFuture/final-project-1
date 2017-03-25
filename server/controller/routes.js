@@ -16,7 +16,7 @@ module.exports = {
   },
   getOrganisation(req, res) {
     const categoryName = req.params.category;
-    const organisations = clientRequest.getOrganisation(categoryName);
+    const organisations = clientRequest.getOrganisation({ Catagory: categoryName });
     organisations.then(organisation => res.status(200).json({ data: organisation }));
   },
   getUsers(req, res) {
@@ -25,7 +25,15 @@ module.exports = {
   },
   getPostcode(req, res) {
     const query = new RegExp(req.body.Postcode, 'i');
-    const searchResult = clientRequest.getPostcode({ Postcode: { $regex: query } });
-    searchResult.then(organisation => res.status(200).json({ data: organisation }));
+    const postcodes = clientRequest.getPostcode({ Postcode: { $regex: query } });
+    postcodes.then(codes => res.status(200).json({ data: codes }));
+  },
+  getSearchedOrganisation(req, res) {
+    const postCode = new RegExp(req.body.Postcode, 'i');
+    const day = new RegExp(req.body.Day, 'i');
+    const services = new RegExp(req.body.Services, 'i');
+    const queryStatement = { $and: [{ Postcode: postCode }, { Day: day }, { Services: services }] };
+    const organisations = clientRequest.getSearchedOrganisation(queryStatement);
+    organisations.then(organisation => res.status(200).json({ data: organisation }));
   },
 };

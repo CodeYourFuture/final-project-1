@@ -16,7 +16,7 @@ console.log('Connected to mongo');
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.set('views', path.join(process.cwd(), 'views'));
@@ -27,7 +27,8 @@ app.get('/api/all/organisation', routes.getAllOrganisation);
 app.get('/api/organisation/category', routes.getCategory);
 app.get('/api/organisation/:category', routes.getOrganisation);
 app.get('/api/all/users', routes.getUsers);
-app.post('/api/organisation/search', routes.getPostcode);
+app.post('/api/organisation/postcode', routes.getPostcode);
+app.post('/api/organisation/search', routes.getSearchedOrganisation);
 // ********************************************************
 // ********************Production**************************
 // ********************************************************

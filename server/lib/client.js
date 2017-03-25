@@ -43,8 +43,8 @@ getData(OrganisationSchema.User.find()
 const categories = () =>
 OrganisationSchema.AllOrganization.distinct('Catagory');
 
-const organisation = catagoryName =>
-getData(OrganisationSchema.AllOrganization.find({ Catagory: catagoryName })
+const organisation = queryStatement =>
+getData(OrganisationSchema.AllOrganization.find(queryStatement)
 .select('-_id')
 .sort('Organisation'));
 
@@ -59,4 +59,5 @@ module.exports = {
   getCategories: categories,
   getOrganisation: organisation,
   getPostcode: postCode,
+  getSearchedOrganisation: organisation,
 };
