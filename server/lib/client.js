@@ -1,7 +1,6 @@
 import path from 'path';
 import fs from 'fs';
 import OrganisationSchema from './onlyOrg';
-//import migrateData from './lib/migrateData';
 
 const migrateData = () => {
   const importedFilePath = path.resolve(__dirname, '..', '../data', 'organisation.json');
