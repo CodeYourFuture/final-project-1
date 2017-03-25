@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import path from 'path';
 import routes from './controller/routes';
-import migrateData from './lib/migrateData';
 
 if (process.env.MONGODB_URI) {
   console.log('Connecting to remote mongo instance');
@@ -23,10 +22,7 @@ app.use(bodyParser.json());
 app.set('views', path.join(process.cwd(), 'views'));
 app.set('view engine', 'hbs');
 
-app.get('/api/migrate', (req, res) => {
-  res.status(200).json(migrateData);
-});
-
+app.get('/api/migrate', routes.getImport);
 app.get('/api/all/organisation', routes.getAll);
 app.get('/api/organisation/category', routes.getCategory);
 app.get('/api/organisation/:category', routes.getOrganisation);
