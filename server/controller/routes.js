@@ -6,7 +6,7 @@ module.exports = {
     const importedData = clientRequest.getImport();
     res.status(200).json(importedData);
   },
-  getAll(req, res) {
+  getAllOrganisation(req, res) {
     const allOrganisation = clientRequest.getAllOrganisation();
     allOrganisation.then(orgData => res.status(200).json({ data: orgData }));
   },
@@ -22,5 +22,10 @@ module.exports = {
   getUsers(req, res) {
     const allUsers = clientRequest.getUsers();
     allUsers.then(users => res.status(200).json({ data: users }));
+  },
+  getPostcode(req, res) {
+    const query = new RegExp(req.body.Postcode, 'i');
+    const searchResult = clientRequest.getPostcode({ Postcode: { $regex: query } });
+    searchResult.then(organisation => res.status(200).json({ data: organisation }));
   },
 };

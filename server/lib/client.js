@@ -33,7 +33,8 @@ query.exec((error, data) => {
 
 const allOrganisation = () =>
 getData(OrganisationSchema.AllOrganization.find()
-.select('-_id'));
+.select('-_id')
+.sort('Organisation'));
 
 const users = () =>
 getData(OrganisationSchema.User.find()
@@ -44,7 +45,12 @@ OrganisationSchema.AllOrganization.distinct('Catagory');
 
 const organisation = catagoryName =>
 getData(OrganisationSchema.AllOrganization.find({ Catagory: catagoryName })
-.select('-_id'));
+.select('-_id')
+.sort('Organisation'));
+
+const postCode = query =>
+getData(OrganisationSchema.AllOrganization.find(query)
+.distinct('Postcode'));
 
 module.exports = {
   getImport: migrateData,
@@ -52,4 +58,5 @@ module.exports = {
   getUsers: users,
   getCategories: categories,
   getOrganisation: organisation,
+  getPostcode: postCode,
 };
