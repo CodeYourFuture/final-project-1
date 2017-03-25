@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="Sidebar">
-          <img src={logoSidebar} className="HBFLogo" alt="HBFLogo" />
+          <img src={logoSidebar} className="HBFLogoSidebar" alt="HBFLogo" />
           <h3 className="Sidebar-title"><a href="https://useless.bit.foo">Organisations</a></h3>
           <div className="Sidebar-link">
             <p><a href="https://useless.bit.foo">Debt</a></p>
