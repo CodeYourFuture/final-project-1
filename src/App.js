@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import logo from './logo.svg';
 import './App.css';
 import organisation1 from './pages/Organisation1';
 
+=======
+import { Link } from 'react-router';
+import './App.css';
+import logoSidebar from '../design/assets/logo-sidebar.svg';
+>>>>>>> 736235d46f273f840899cd8438585beec4d3dd4c
 
 class App extends Component {
  
@@ -77,9 +83,30 @@ class App extends Component {
 
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+        <div className="Sidebar">
+          <img src={logoSidebar} className="HBFLogoSidebar" alt="HBFLogo" />
+          <h3 className="Sidebar-title"><a href="https://useless.bit.foo">Organisations</a></h3>
+          <div className="Sidebar-link">
+            <p><a href="https://useless.bit.foo">Debt</a></p>
+            <p><a href="https://useless.bit.foo">YP Families</a></p>
+            <p><a href="https://useless.bit.foo">Women DV</a></p>
+            <p><a href="https://useless.bit.foo">Trafﬁcking</a></p>
+            <p><a href="https://useless.bit.foo">Destitution</a></p>
+            <p><a href="https://useless.bit.foo">Mental Health Services</a></p>
+            <p><a href="https://useless.bit.foo">Healthcare</a></p>
+            <p><a href="https://useless.bit.foo">Debt</a></p>
+            <p><a href="https://useless.bit.foo">YP Families</a></p>
+            <p><a href="https://useless.bit.foo">Women DV</a></p>
+            <p><a href="https://useless.bit.foo">Trafﬁcking</a></p>
+            <p><a href="https://useless.bit.foo">Destitution</a></p>
+            <p><a href="https://useless.bit.foo">Mental Health Services</a></p>
+            <p><a href="https://useless.bit.foo">Healthcare</a></p>
+            <p><a href="https://useless.bit.foo">Debt</a></p>
+            <p><a href="https://useless.bit.foo">YP Families</a></p>
+            <p><a href="https://useless.bit.foo">Women DV</a></p>
+            <p><a href="https://useless.bit.foo">Trafﬁcking</a></p>
+          </div>
+          <h3 className="Sidebar-title"><a href="https://useless.bit.foo">Users</a></h3>
         </div>
 
         <p className="App-intro">

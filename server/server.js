@@ -1,8 +1,13 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
 import path from 'path';
+<<<<<<< HEAD
 import allOrganisationData from './migrateData';
 import orgSchema from './initialSchema';
+=======
+import routes from './controller/routes';
+>>>>>>> 736235d46f273f840899cd8438585beec4d3dd4c
 
 if (process.env.MONGODB_URI) {
   console.log('Connecting to remote mongo instance');
@@ -16,6 +21,7 @@ console.log('Connected to mongo');
 
 const app = express();
 
+<<<<<<< HEAD
 app.get('/api', (req, res) => {
   allOrganisationData.save((err, data) => {
     if (err) throw err;
@@ -30,7 +36,21 @@ app.get('/api/org', (req, res) => orgSchema.find((error, organisation) => {
     return res.send(organisation);
   }
 }));
+=======
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
+app.set('views', path.join(process.cwd(), 'views'));
+app.set('view engine', 'hbs');
+>>>>>>> 736235d46f273f840899cd8438585beec4d3dd4c
+
+app.get('/api/migrate', routes.getImport);
+app.get('/api/all/organisation', routes.getAllOrganisation);
+app.get('/api/organisation/category', routes.getCategory);
+app.get('/api/organisation/:category', routes.getOrganisation);
+app.get('/api/all/users', routes.getUsers);
+app.post('/api/organisation/postcode', routes.getPostcode);
+app.post('/api/organisation/search', routes.getSearchedOrganisation);
 // ********************************************************
 // ********************Production**************************
 // ********************************************************
