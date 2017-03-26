@@ -23,10 +23,12 @@ app.set('views', path.join(process.cwd(), 'views'));
 app.set('view engine', 'hbs');
 
 app.get('/api/migrate', routes.getImport);
-app.get('/api/all/organisation', routes.getAll);
+app.get('/api/all/organisation', routes.getAllOrganisation);
 app.get('/api/organisation/category', routes.getCategory);
 app.get('/api/organisation/:category', routes.getOrganisation);
 app.get('/api/all/users', routes.getUsers);
+app.post('/api/organisation/postcode', routes.getPostcode);
+app.post('/api/organisation/search', routes.getSearchedOrganisation);
 // ********************************************************
 // ********************Production**************************
 // ********************************************************
