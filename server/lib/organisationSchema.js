@@ -6,7 +6,7 @@ const organisationSchema = new Schema({
   Area: String,
   Organisation: String,
   Clients: [],
-  Catagory: String,
+  Category: String,
   Email: String,
   Website: String,
   Day: [],

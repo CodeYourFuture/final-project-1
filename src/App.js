@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
 import logo from './logo.svg';
 import './App.css';
 import organisation1 from './pages/Organisation1';
 
-=======
+/*=======
 import { Link } from 'react-router';
 import './App.css';
 import logoSidebar from '../design/assets/logo-sidebar.svg';
 >>>>>>> 736235d46f273f840899cd8438585beec4d3dd4c
-
+*/
 class App extends Component {
  
   // constructor gets called once when the class is initiated
@@ -57,7 +56,7 @@ class App extends Component {
    );            
 }
 getOrganizations = () => {
-    const APIAddress = '';
+    const APIAddress = 'https://code-your-future.github.io/api-demo/area/all/index.json';
     fetch(APIAddress)
     .then(function(response) {
     console.log(response) 
