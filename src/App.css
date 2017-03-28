@@ -50,7 +50,6 @@
   position: relative;
   color: #89d3d3;
 }
-
 .Sidebar-title-item-active::before {
     content: "";
     display: inline-block;
