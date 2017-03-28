@@ -30,7 +30,6 @@ class App extends Component {
             <p><Link to="/organisations/17" activeClassName="Sidebar-link-item-active" className="Sidebar-link-item">Volunteering</Link></p>
             <p><Link to="/organisations/18" activeClassName="Sidebar-link-item-active" className="Sidebar-link-item">Young People and Children</Link></p>
           </div>
-          <h3 className="Sidebar-title"><Link to="/users" activeClassName="Sidebar-title-item-active" className="Sidebar-title-item">Users</Link></h3>
         </div>
 
         <p className="App-intro">
