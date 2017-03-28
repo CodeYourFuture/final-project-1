@@ -16,7 +16,7 @@ module.exports = {
   },
   getOrganisation(req, res) {
     const categoryName = req.params.category;
-    const organisations = clientRequest.getOrganisation({ Catagory: categoryName });
+    const organisations = clientRequest.getOrganisation({ Category: categoryName });
     organisations.then(organisation => res.status(200).json({ data: organisation }));
   },
   getUsers(req, res) {

@@ -41,7 +41,7 @@ getData(OrganisationSchema.User.find()
 .select('-_id'));
 
 const categories = () =>
-OrganisationSchema.AllOrganization.distinct('Catagory');
+OrganisationSchema.AllOrganization.distinct('Category');
 
 const organisation = queryStatement =>
 getData(OrganisationSchema.AllOrganization.find(queryStatement)
