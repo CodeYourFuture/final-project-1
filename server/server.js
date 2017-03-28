@@ -25,10 +25,14 @@ app.set('view engine', 'hbs');
 app.get('/api/migrate', routes.getImport);
 app.get('/api/all/organisation', routes.getAllOrganisation);
 app.get('/api/organisation/category', routes.getCategory);
-app.get('/api/organisation/:category', routes.getOrganisation);
+app.get('/api/organisation/category/:category', routes.getOrganisation);
 app.get('/api/all/users', routes.getUsers);
-app.post('/api/organisation/postcode', routes.getPostcode);
-app.post('/api/organisation/search', routes.getSearchedOrganisation);
+app.get('/api/organisation/postcode', routes.getPostcode);
+app.get('/api/organisation/search', routes.getSearchedOrganisation);
+app.get('/api/organisation/borough', routes.getBorough);
+app.get('/api/organisation/area', routes.getArea);
+app.post('/api/organisation/post', routes.postOrganisation);
+
 // ********************************************************
 // ********************Production**************************
 // ********************************************************

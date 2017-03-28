@@ -6,7 +6,7 @@ const organisationSchema = new Schema({
   Area: String,
   Organisation: String,
   Clients: [],
-  Catagory: String,
+  Category: String,
   Email: String,
   Website: String,
   Day: [],
@@ -27,6 +27,6 @@ const Users = mongoose.model('User', User);
 const Organisation = mongoose.model('organisation', organisationSchema);
 
 module.exports = {
-  AllOrganization: Organisation,
+  AllOrganisation: Organisation,
   User: Users,
 };
