@@ -27,6 +27,6 @@ const Users = mongoose.model('User', User);
 const Organisation = mongoose.model('organisation', organisationSchema);
 
 module.exports = {
-  AllOrganization: Organisation,
+  AllOrganisation: Organisation,
   User: Users,
 };

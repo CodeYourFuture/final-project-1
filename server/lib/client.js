@@ -13,13 +13,23 @@ const migrateData = () => {
   });
   userModel.save();
   return JSON.parse(importedData).map((organisation) => {
-    orgaisationModel = new OrganisationSchema.AllOrganization(organisation);
+    orgaisationModel = new OrganisationSchema.AllOrganisation(organisation);
     orgaisationModel.save((error) => {
       if (error) {
         throw error;
       }
     });
     return organisation;
+  });
+};
+const saveOrganisation = (queryStatement) => {
+  const organisationModel = new OrganisationSchema.AllOrganisation(queryStatement);
+  return organisationModel.save((error) => {
+    if (error) {
+      throw error;
+    } else {
+      return true;
+    }
   });
 };
 
@@ -32,7 +42,7 @@ query.exec((error, data) => {
 });
 
 const allOrganisation = () =>
-getData(OrganisationSchema.AllOrganization.find()
+getData(OrganisationSchema.AllOrganisation.find()
 .select('-_id')
 .sort('Organisation'));
 
@@ -40,24 +50,29 @@ const users = () =>
 getData(OrganisationSchema.User.find()
 .select('-_id'));
 
-const categories = () =>
-OrganisationSchema.AllOrganization.distinct('Category');
+const distinctData = queryStatement =>
+OrganisationSchema.AllOrganisation
+.distinct(queryStatement)
+.sort();
 
 const organisation = queryStatement =>
-getData(OrganisationSchema.AllOrganization.find(queryStatement)
+getData(OrganisationSchema.AllOrganisation.find(queryStatement)
 .select('-_id')
 .sort('Organisation'));
 
-const postCode = query =>
-getData(OrganisationSchema.AllOrganization.find(query)
+const postCode = queryStatement =>
+getData(OrganisationSchema.AllOrganisation.find(queryStatement)
 .distinct('Postcode'));
 
 module.exports = {
   getImport: migrateData,
   getAllOrganisation: allOrganisation,
   getUsers: users,
-  getCategories: categories,
+  getCategories: distinctData,
   getOrganisation: organisation,
   getPostcode: postCode,
   getSearchedOrganisation: organisation,
+  getBoroughs: distinctData,
+  getArea: distinctData,
+  saveOrganisationData: saveOrganisation,
 };
