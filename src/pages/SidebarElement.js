@@ -13,10 +13,10 @@ class SidebarElement extends React.Component {
       <div className="Sidebar-link">
         {
           categories.map(category =>
-            <P onClick = {this.returnService.bind(this)} 
+            <div onClick = {this.returnService.bind(this)} 
               activeClassName="Sidebar-link-item-active"
               className="Sidebar-link-item" role="button"
-            >{category} </P>)
+            >{category} </div>)
         }
       </div>
     );
