@@ -76,6 +76,7 @@
   text-align: left;
   margin-left: 20px;
   line-height: 70%;
+    cursor: pointer;
 }
 
 .Sidebar-link-item:hover{ 
@@ -106,4 +107,69 @@
 
 li{
   list-style-type: none;
+}
+
+/******** Organisation componenent **************/
+
+.Cards{
+  float:left;
+  padding: 0px 2px 2px 3px;    
+  /*border-width: 2px;
+  border-bottom-width:2px;
+  border-bottom-color: blue;
+  border-bottom-style: solid;*/
+  
+  width: 300px;
+  height: 200px;
+  box-shadow: 0 8px 6px -6px gray;
+}
+
+.title{
+  font-family: 'Roboto Condensed' ;
+  color: #28afb0 ;
+  font-size: 22px;
+  font-weight: normal;
+  text-align: left;  
+}
+.Block-title-div{
+  position: relative;
+  float: left;
+  margin-top: 2px;
+}
+
+.Change {
+    margin-top: 2PX;
+    float: right;
+    width: 80px;
+    padding: 2px;
+}
+div.Change lable {
+  padding: 2px
+}
+
+.Block-area-service{
+ display: flex;
+ flex-direction: column;
+ margin-top: 40px;
+ width: 95%;
+ position: relative;
+ }
+div.Block-area-service div{
+ display: flex;
+}
+div.Detail{
+   width: 90px;
+   height: 50px;
+   top: 60px;
+   margin-right: 2px;
+   margin-bottom: 2px;
+   float:right;
+   position: relative;  
+}
+
+div.Detail button{
+  border:none; 
+  width: 100%;
+  height: 100%;
+  position: relative;
 }

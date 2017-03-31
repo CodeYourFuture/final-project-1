@@ -43,7 +43,7 @@ query.exec((error, data) => {
 
 const allOrganisation = () =>
 getData(OrganisationSchema.AllOrganisation.find()
-.select('-_id')
+.limit(10)
 .sort('Organisation'));
 
 const users = () =>
