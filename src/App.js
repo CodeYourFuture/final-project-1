@@ -9,8 +9,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      organisation: [],
-      categories: [],
+      organisationList: [],
+      categoriesList: [],
     };
 
     this.API = this.API.bind(this);
@@ -19,12 +19,12 @@ class App extends Component {
 
   componentDidMount() {
     this.API('api/organisation/category')
-    .then(data => this.setState({ categories: data }));
+    .then(categories => this.setState({ categoriesList: categories }));
   }
 
   getService(service) {
     this.API(`api/organisation/category/${service}`)
-    .then(organisationList => this.setState({ organisation: organisationList }));
+    .then(organisation => this.setState({ organisationList: organisation }));
   }
 
   API(URL) {
@@ -45,11 +45,12 @@ class App extends Component {
             >Organisations
             </Link>
           </h3>
-          <SidebarElement categories={this.state.categories} service={this.getService} />
+          <SidebarElement categories={this.state.categoriesList} service={this.getService} />
         </div>
         <div>
           {
-            this.state.organisation.map(organisationList => <Card {...organisationList} key={organisationList.id} />)
+            this.state.organisationList.map(organisation =>
+              <Card {...organisation} key={organisation.id} />)
           }
         </div>
       </div>
