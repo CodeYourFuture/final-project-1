@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import '../App.css';
 
-class SidebarElement extends React.Component {
+class SidebarElement extends Component {
 
   returnService(event) {
     this.props.service(event.currentTarget.textContent);
@@ -12,11 +12,11 @@ class SidebarElement extends React.Component {
     return (
       <div className="Sidebar-link">
         {
-          categories.map(category =>
-            <p onClick = {this.returnService.bind(this)} 
+          categories.map(category => (
+            <p onClick={this.returnService.bind(this)} 
               activeClassName="Sidebar-link-item-active"
-              className="Sidebar-link-item" role="button"
-            >{category} </p>)
+              className="Sidebar-link-item"
+            >{category}</p>))
         }
       </div>
     );
