@@ -13,21 +13,21 @@ class App extends Component {
       categoriesList: [],
     };
 
-    this.API = this.API.bind(this);
+    this.APIs = this.APIs.bind(this);
     this.getService = this.getService.bind(this);
   }
 
   componentDidMount() {
-    this.API('api/organisation/category')
+    this.APIs('api/organisation/category')
     .then(categories => this.setState({ categoriesList: categories }));
   }
 
   getService(service) {
-    this.API(`api/organisation/category/${service}`)
+    this.APIs(`api/organisation/category/${service}`)
     .then(organisation => this.setState({ organisationList: organisation }));
   }
 
-  API(URL) {
+  APIs(URL) {
     return fetch(URL)
     .then(response => response.json())
     .then(data => data.data);

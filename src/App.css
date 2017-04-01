@@ -66,17 +66,20 @@
 .Sidebar-link-item{
   color: #f5f0f0;
   text-decoration: none;
-}
-
-.Sidebar-link{
+  background: transparent;
+  border: transparent;
+  text-align: left;
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   font-weight: 300;
   color: #f5f0f0;
-  text-align: left;
+}
+
+.Sidebar-link{
+  display: flex;
+  flex-direction: column;
   margin-left: 20px;
   line-height: 70%;
-    cursor: pointer;
 }
 
 .Sidebar-link-item:hover{ 

@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import '../App.css';
 
 class SidebarElement extends Component {
+  constructor(props) {
+    super(props);
+    this.returnService = this.returnService.bind(this);
+  }
 
   returnService(event) {
-    this.props.service(event.currentTarget.textContent);
+    this.props.service(event.target.value);
   }
 
   render() {
@@ -13,10 +17,14 @@ class SidebarElement extends Component {
       <div className="Sidebar-link">
         {
           categories.map(category => (
-            <p onClick={this.returnService.bind(this)} 
+            <button
+              onClick={this.returnService}
               activeClassName="Sidebar-link-item-active"
               className="Sidebar-link-item"
-            >{category}</p>))
+              value={category}
+            >
+              {category}
+            </button>))
         }
       </div>
     );
