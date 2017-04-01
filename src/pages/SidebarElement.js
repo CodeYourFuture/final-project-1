@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 
 class SidebarElement extends Component {
+
   constructor(props) {
     super(props);
     this.returnService = this.returnService.bind(this);

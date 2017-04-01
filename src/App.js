@@ -4,6 +4,10 @@ import Card from './pages/Card';
 import SidebarElement from './pages/SidebarElement';
 import logoSidebar from '../public/assets/logo-sidebar.svg';
 
+const APIs = URL => fetch(URL)
+  .then(response => response.json())
+  .then(data => data.data);
+
 class App extends Component {
 
   constructor(props) {
@@ -12,26 +16,18 @@ class App extends Component {
       organisationList: [],
       categoriesList: [],
     };
-
-    this.APIs = this.APIs.bind(this);
-    this.getService = this.getService.bind(this);
   }
 
   componentDidMount() {
-    this.APIs('api/organisation/category')
+    APIs('api/organisation/category')
     .then(categories => this.setState({ categoriesList: categories }));
   }
 
   getService(service) {
-    this.APIs(`api/organisation/category/${service}`)
+    APIs(`api/organisation/category/${service}`)
     .then(organisation => this.setState({ organisationList: organisation }));
   }
 
-  APIs(URL) {
-    return fetch(URL)
-    .then(response => response.json())
-    .then(data => data.data);
-  }
   render() {
     return (
       <div className="App">
@@ -49,6 +45,7 @@ class App extends Component {
         </div>
         <div>
           {
+
             this.state.organisationList.map(organisation =>
               <Card {...organisation} key={organisation.id} />)
           }
