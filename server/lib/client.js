@@ -43,7 +43,7 @@ query.exec((error, data) => {
 
 const allOrganisation = () =>
 getData(OrganisationSchema.AllOrganisation.find()
-.limit(10)
+.limit(2)
 .sort('Organisation'));
 
 const users = () =>
@@ -57,7 +57,7 @@ OrganisationSchema.AllOrganisation
 
 const organisation = queryStatement =>
 getData(OrganisationSchema.AllOrganisation.find(queryStatement)
-.select('-_id')
+.limit(1)
 .sort('Organisation'));
 
 const postCode = queryStatement =>
