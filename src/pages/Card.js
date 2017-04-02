@@ -5,24 +5,46 @@ class Card extends Component {
     super(props);
     this.state = {
       toggle: false,
-      style: {},
+      styleOuter: {},
+      styleInner: {},
+      detailText: '+ Detail',
     };
+
     this.handleToggle = this.handleToggle.bind(this);
   }
 
   handleToggle() {
     if (this.state.toggle === false) {
       this.setState({ toggle: true });
-      const styles = {
+
+      const innerDiv = {
         display: 'flex',
+        justifyContent: 'always',
+        flexDirection: 'column',
+        width: '100%',
+        padding: '0',
+        border: '1px solid blue',
       };
-      this.setState({ style: styles });
+
+      const outerDiv = {
+        display: 'flex',
+        width: '100%',
+        position: 'relative',
+        marginTop: '5px',
+        padding: '2px',
+        border: '1px solid blue',
+      };
+
+      this.setState({ styleOuter: outerDiv });
+      this.setState({ styleInner: innerDiv });
+      this.setState({ detailText: '- Detail' });
     } else {
-      const styles = {
+      const outerDiv = {
         display: 'none',
       };
       this.setState({ toggle: false });
-      this.setState({ style: styles });
+      this.setState({ styleOuter: outerDiv });
+      this.setState({ detailText: '+ Detail' });
     }
   }
   render() {
@@ -31,51 +53,51 @@ class Card extends Component {
       <div className="Cards">
         <div className="one">
           <div>
-            <lable className="title" >{Organisation.Organisation}</lable>
+            <div className="title" >{Organisation.Organisation}</div>
           </div>
           <div>
-            <lable >Delete</lable>
-            <lable >Edit</lable>
+            <div>Delete</div>
+            <div >Edit</div>
           </div>
         </div>
         <div className="two">
           <div>
-            <lable>Area: {Organisation.Area}</lable>
+            <div>Area: {Organisation.Area}</div>
           </div> |
           <div>
-            <lable>Borough: {Organisation.Borough}</lable>
+            <div>Borough: {Organisation.Borough}</div>
           </div>
         </div>
         <div className="three">
-          <ul>
-            <li>- {Organisation.Services}</li>
-          </ul>
+          <div>- {Organisation.Services}</div>
         </div>
         {
           this.state.toggle ?
-            <div style={this.state.styles} >
-              <div>
+            <div style={this.state.styleOuter} >
+              <div style={this.state.styleInner}>
                 <div>
-                  <lable>Process</lable>
-                  <lable>{Organisation.Process}</lable>
+                  <div><b>Process </b></div>
+                  <div>{Organisation.Process}</div>
                 </div>
                 <div>
-                  <lable>Telephone</lable>
-                  <lable>{Organisation.Tel}</lable>
+                  <div><b>Telephone </b></div>
+                  <p>{Organisation.Tel}</p>
                 </div>
               </div>
-              <div>
-                <div>Day
-                  <lable>{Organisation.Day}</lable>
+              <div style={this.state.styleInner}>
+                <div>
+                  <div><b>Day </b></div>
+                  <div>{Organisation.Day}</div>
                 </div>
-                <div>Email
-                  <lable>{Organisation.email}</lable>
+                <div>
+                  <div><b>Email </b></div>
+                  <div>{Organisation.email}</div>
                 </div>
               </div>
             </div>
         : null }
         <div className="five">
-          <button onClick={this.handleToggle}> + Details </button>
+          <button onClick={this.handleToggle}>{ this.state.detailText }</button>
         </div>
       </div>
     );

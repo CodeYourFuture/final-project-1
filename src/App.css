@@ -9,10 +9,12 @@
 
 .Sidebar{
   margin-top: -17px;
+  margin-right: 10px;
   float: left;
   width: 256px;
   min-height: 100%;
   background-color: #37392e;
+
 }
 
 .HBFLogoSidebar{
@@ -121,55 +123,75 @@ li{
 .one{
   display: flex;
   width: 100%;
-  height: 10%;
   margin-top: 10px;
   position: relative;
   border: 1px solid blue;
 }
-.two, .three, .four{
+.two, .three{
   display: flex;
+  justify-content: always;
   width: 100%;
   position: relative;
   margin-top: 5px; 
   border:1px solid blue;
 }
-.four div{
-  display: flex;
-  justify-content:flex-end;
-  flex-direction: column;
-  width: 100%;
-  padding: 0;
-  border:1px solid blue;
-  display: none;
-}
 .five{
-  border: 1px solid blue;
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  border: 1px solid blue;  
+  padding: 5px;
+  height: 45px;
 }
 .five button{
-  float: right;
-  width: 80px;
-  height: 50px;
+  padding: 2px;
   background: gray;
+  height: 100%;
+  width: 60px;
+  position: relative;
 }
 .Cards{
   display: flex;
+  align-self: flex-start;
   flex-direction: column;
   align-items: left;
   padding: 0px 2px 2px 3px;    
   width:40%;
-  position: relative; 
   box-shadow: 0 8px 6px -6px gray;
 }
 
 .title{
   font-family: 'Roboto Condensed' ;
   color: #28afb0 ;
-  font-size: 22px;
+  font-size: 16px;
   font-weight: normal;
-  text-align: left;  
+  text-align: left; 
 }
 .Block-title-div{
   position: relative;
   float: left;
   margin-top: 2px;
+}
+
+.Result-container{
+  display: flex; 
+  flex-flow: row wrap;  
+  justify-content: space-around;
+  border: 1px solid green;
+  position: relative;
+}
+.Container{
+  display: flex;
+  flex-direction: column;
+  margin: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
+  height: 100%; 
+  border: 1px solid red;
+  position: relative;
+}
+.Search-container{
+  width: 100%;
+  height: 50px;
+  margin: 10px;
+  border: 1px solid red;
 }

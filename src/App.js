@@ -44,12 +44,16 @@ class App extends Component {
           </h3>
           <SidebarElement categories={this.state.categoriesList} service={this.getService} />
         </div>
-        <div>
-          {
-
-            this.state.organisationList.map(organisation =>
-              <Card {...organisation} key={organisation.id} />)
-          }
+        <div className="Container">
+          <div className="Search-container" >
+            Top Header : Search Form Content
+          </div>
+          <div className="Result-container">
+            {
+              this.state.organisationList.map(organisation =>
+                <Card {...organisation} key={organisation.id} />)
+            }
+          </div>
         </div>
       </div>
     );

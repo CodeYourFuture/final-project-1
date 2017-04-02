@@ -57,7 +57,7 @@ OrganisationSchema.AllOrganisation
 
 const organisation = queryStatement =>
 getData(OrganisationSchema.AllOrganisation.find(queryStatement)
-.limit(1)
+.limit(4)
 .sort('Organisation'));
 
 const postCode = queryStatement =>
