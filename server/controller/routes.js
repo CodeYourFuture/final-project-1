@@ -1,4 +1,3 @@
-
 import clientRequest from '../lib/client';
 
 module.exports = {
@@ -46,11 +45,20 @@ module.exports = {
   },
   postOrganisation(req, res) {
     const organisation = req.body;
-    if (clientRequest.saveOrganisationData(organisation)) {
+    const saveStatus = clientRequest.saveOrganisationData(organisation);
+    if (saveStatus) {
       res.status(200).json({ Success: 'Saved Succesfully' });
     } else {
       res.status(500).json({ Success: 'Not Saved Succesfully' });
     }
   },
+  putOrganisation(req, res) {
+    const query = req.body;
+    const updateStatus = clientRequest.putOrganisation(query);
+    if (updateStatus) {
+      res.status(200).json({ Success: 'Update Succesfully' });
+    } else {
+      res.status(500).json({ Success: 'Not Update Succesfully' });
+    }
+  },
 };
-
