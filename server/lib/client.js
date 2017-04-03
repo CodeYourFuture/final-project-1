@@ -22,15 +22,29 @@ const migrateData = () => {
     return organisation;
   });
 };
+
 const saveOrganisation = (queryStatement) => {
   const organisationModel = new OrganisationSchema.AllOrganisation(queryStatement);
   return organisationModel.save((error) => {
     if (error) {
       throw error;
-    } else {
-      return true;
     }
+    return true;
   });
+};
+
+const excuteQuery = queryStatement =>
+queryStatement.exec((error) => {
+  if (error) {
+    throw error;
+  }
+  return true;
+});
+
+const updateOrganisation = (queryStatement) => {
+  const { _id, ...rest } = queryStatement;
+  const options = { new: false };
+  return excuteQuery(OrganisationSchema.AllOrganisation.findByIdAndUpdate(_id, rest, options));
 };
 
 const getData = query =>
@@ -56,7 +70,7 @@ OrganisationSchema.AllOrganisation
 .sort();
 
 const organisation = queryStatement =>
-getData(OrganisationSchema.AllOrganisation.find(queryStatement)
+excuteQuery(OrganisationSchema.AllOrganisation.find(queryStatement)
 .limit(4)
 .sort('Organisation'));
 
@@ -75,4 +89,5 @@ module.exports = {
   getBoroughs: distinctData,
   getArea: distinctData,
   saveOrganisationData: saveOrganisation,
+  putOrganisation: updateOrganisation,
 };
