@@ -16,18 +16,18 @@ class Autocomplete extends Component {
   }
 
   render() {
-    const postcods = this.props.postcods;
+    const lookup = this.props.lookup;
     return (
-      <div>
+      <div className="Search-Fields">
         <input
           onKeyPress={this.handleEnterKey}
           type="text"
           list="postcode"
           placeholder="search..."
         />
-        <datalist id="postcode" >
+        <datalist id="postcode">
           {
-            postcods.map(item => (String(item).length < 9 ? <option>{item}</option> : null))
+            lookup.map(item => (String(item).length < 9 ? <option>{item}</option> : null))
           }
         </datalist>
       </div>

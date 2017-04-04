@@ -53,9 +53,9 @@ class App extends Component {
         <div className="Container">
           <div className="Header-container" >
             <div className="Search">
-              Search near <Autocomplete postcods={this.state.postcodeList} />
+              Search near <Autocomplete lookup={this.state.postcodeList} />
               Day <Days />
-              Services<Autocomplete postcods={this.state.postcodeList} />
+              Services<Autocomplete lookup={this.state.postcodeList} />
             </div>
           </div>
           <div className="Result-container">

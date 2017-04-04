@@ -12,11 +12,13 @@ class DayComp extends Component {
 
   render() {
     return (
-      <select  >
-        {
-          weekDays.map(day => <option  value={day}>{day}</option>)
-        }
-      </select>
+      <div className="Search-Fields">
+        <select>
+          {
+            weekDays.map(day => <option value={day}>{day}</option>)
+          }
+        </select>
+      </div>
     );
   }
 
