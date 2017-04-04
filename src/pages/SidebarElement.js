@@ -19,9 +19,9 @@ class SidebarElement extends Component {
         {
           categories.map(category => (
             <button
-              onClick={this.returnService}
               activeClassName="Sidebar-link-item-active"
               className="Sidebar-link-item"
+              onClick={this.returnService}
               value={category}
             >
               {category}
