@@ -189,9 +189,33 @@ li{
   border: 1px solid red;
   position: relative;
 }
-.Search-container{
-  width: 100%;
+
+
+/*************************** Search ***********************/
+.Header-container{
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  position: relative;
+  width: 90%;
   height: 50px;
   margin: 10px;
   border: 1px solid red;
 }
+
+.Search{
+  display: flex;
+  flex-flow: row wrap;  
+  width: 80%;
+  margin: 5px;
+  padding: 5px;
+  margin-left: 100px;
+  border: 1px solid blue;
+}
+
+
+
+
+
+
+/*********************** End Search ***********************/

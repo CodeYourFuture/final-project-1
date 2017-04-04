@@ -12,10 +12,15 @@
     "eslint-plugin-jest": "^19.0.1",
     "eslint-plugin-jsx-a11y": "^3.0.2 || ^4.0.0",
     "eslint-plugin-react": "^6.9.0",
+    "jsonp": "^0.2.1",
+    "material-ui": "^0.17.1",
     "nodemon": "^1.11.0",
-    "react-scripts": "0.9.5"
+    "react-scripts": "0.9.5",
+    "react-simple-autocomplete": "^1.0.2",
+    "react-tap-event-plugin": "^2.0.1"
   },
   "dependencies": {
+    "antd": "^2.9.0",
     "body-parser": "^1.17.1",
     "concurrently": "^3.4.0",
     "express": "^4.15.2",
@@ -23,7 +28,10 @@
     "mongoose-gen": "^2.1.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-router": "^3.0.2"
+    "react-dropdown-multiselect": "^1.0.0",
+    "react-router": "^3.0.2",
+    "react-simple-autocomplete": "^1.0.2",
+    "react-tap-event-plugin": "^2.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -43,12 +51,12 @@
   "eslintConfig": {
     "extends": "airbnb",
     "plugins": [
-      "jest", 
+      "jest",
       "react"
     ],
     "parserOptions": {
-      "ecmaFeatures": { 
-        "jsx": true 
+      "ecmaFeatures": {
+        "jsx": true
       }
     },
     "env": {
