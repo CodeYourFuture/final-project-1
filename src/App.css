@@ -212,13 +212,24 @@ li{
   margin-left: 100px;
   border: 1px solid blue;
 }
-
+.Search select{
+   border-bottom-color: blue;
+   background: transparent;
+}
 .Search-Fields{
   margin-left: 10px;
   margin-right: 10px;
+  border-bottom-color: blue;
 }
 
+.Search-Fields select{
 
+  background: transparent;
+  border: transparent; 
+}
+.Search-Fields input{
+  border: transparent;
+}
 
 
 

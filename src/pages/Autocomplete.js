@@ -10,7 +10,8 @@ class Autocomplete extends Component {
 
   handleEnterKey(event) {
     if (event.charCode === 13) {
-      //this.props.getUserInput(event.target.value);
+      this.props.getUserInput(event.target.value);
+      //alert(event.target.value);
       event.preventDefault();
     }
   }
@@ -22,10 +23,10 @@ class Autocomplete extends Component {
         <input
           onKeyPress={this.handleEnterKey}
           type="text"
-          list="postcode"
+          list="autocomplete"
           placeholder="search..."
         />
-        <datalist id="postcode">
+        <datalist id="autocomplete">
           {
             lookup.map(item => (String(item).length < 9 ? <option>{item}</option> : null))
           }

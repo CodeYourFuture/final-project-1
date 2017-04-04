@@ -20,6 +20,7 @@ class App extends Component {
       postcodeList: [],
     };
     this.getService = this.getService.bind(this);
+    this.getPost = this.getPost.bind(this);
   }
 
   componentDidMount() {
@@ -33,6 +34,13 @@ class App extends Component {
   getService(service) {
     APIs(`/api/organisation/category/${service}`)
     .then(organisation => this.setState({ organisationList: organisation }));
+  }
+
+  getPost(postcode) {
+    const post = `?Postcode=${postcode}`;
+    APIs(`/api/organisation/search${post}`)
+    .then(organisation => this.setState({ organisationList: organisation }));
+    console.log(this.state.organisationList);
   }
 
   render() {
@@ -53,7 +61,11 @@ class App extends Component {
         <div className="Container">
           <div className="Header-container" >
             <div className="Search">
-              Search near <Autocomplete lookup={this.state.postcodeList} />
+              Search near
+              <Autocomplete
+                lookup={this.state.postcodeList}
+                getUserInput={this.getPost}
+              />
               Day <Days />
               Services<Autocomplete lookup={this.state.postcodeList} />
             </div>
