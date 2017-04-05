@@ -40,11 +40,11 @@
   text-decoration: none;
 }
 
-.Sidebar-title>a:hover{ 
+.Sidebar-title>a:hover{
   color: #f5f0f0;
 }
 
-.Sidebar-title>a:active{ 
+.Sidebar-title>a:active{
   color: #28afb0;
 }
 
@@ -84,11 +84,11 @@
   line-height: 70%;
 }
 
-.Sidebar-link-item:hover{ 
+.Sidebar-link-item:hover{
   color: #89d3d3;
 }
 
-.Sidebar-link-item:active{ 
+.Sidebar-link-item:active{
   color: #28afb0;
 }
 
@@ -132,14 +132,14 @@ li{
   justify-content: always;
   width: 100%;
   position: relative;
-  margin-top: 5px; 
+  margin-top: 5px;
   border:1px solid blue;
 }
 .five{
   align-items: center;
   display: flex;
   justify-content: flex-end;
-  border: 1px solid blue;  
+  border: 1px solid blue;
   padding: 5px;
   height: 45px;
 }
@@ -155,7 +155,7 @@ li{
   align-self: flex-start;
   flex-direction: column;
   align-items: left;
-  padding: 0px 2px 2px 3px;    
+  padding: 0px 2px 2px 3px;
   width:40%;
   box-shadow: 0 8px 6px -6px gray;
 }
@@ -165,7 +165,7 @@ li{
   color: #28afb0 ;
   font-size: 16px;
   font-weight: normal;
-  text-align: left; 
+  text-align: left;
 }
 .Block-title-div{
   position: relative;
@@ -174,8 +174,8 @@ li{
 }
 
 .Result-container{
-  display: flex; 
-  flex-flow: row wrap;  
+  display: flex;
+  flex-flow: row wrap;
   justify-content: space-around;
   border: 1px solid green;
   position: relative;
@@ -184,8 +184,8 @@ li{
   display: flex;
   flex-direction: column;
   margin: 10px 10px 10px 10px;
-  padding: 10px 10px 10px 10px;
-  height: 100%; 
+  padding: 5px 5px 5px 5px;
+  height: 100%;
   border: 1px solid red;
   position: relative;
 }
@@ -196,25 +196,24 @@ li{
   display: flex;
   flex-direction: column;
   padding: 5px;
+  margin-bottom: 5px;
   position: relative;
-  width: 90%;
-  height: 50px;
-  margin: 10px;
+  width: 98%;
+  height: 95px;
   border: 1px solid red;
 }
 
 .Search{
   display: flex;
-  flex-flow: row wrap;  
-  width: 80%;
-  margin: 5px;
-  padding: 5px;
-  margin-left: 100px;
+  flex-flow: row wrap;
+  width: 99%;
+  margin-left: 2px;
   border: 1px solid blue;
 }
-.Search select{
-   border-bottom-color: blue;
-   background: transparent;
+.Search p{
+   padding-right: 10px;
+   margin-bottom: 25px;
+   margin-left: 50px;
 }
 .Search-Fields{
   margin-left: 10px;
@@ -225,12 +224,11 @@ li{
 .Search-Fields select{
 
   background: transparent;
-  border: transparent; 
+  border: transparent;
 }
 .Search-Fields input{
   border: transparent;
 }
-
 
 
 
