@@ -23,7 +23,7 @@ class Card extends Component {
         flexDirection: 'column',
         width: '100%',
         padding: '0',
-        border: '1px solid blue',
+        // border: '1px solid blue',
       };
 
       const outerDiv = {
@@ -32,7 +32,7 @@ class Card extends Component {
         position: 'relative',
         marginTop: '5px',
         padding: '2px',
-        border: '1px solid blue',
+        // border: '1px solid blue',
       };
 
       this.setState({ styleOuter: outerDiv });
@@ -53,45 +53,45 @@ class Card extends Component {
       <div className="Cards">
         <div className="one">
           <div>
-            <div className="title" >{Organisation.Organisation}</div>
+            <div className="title">{Organisation.Organisation}</div>
           </div>
-          <div>
-            <div>Delete</div>
-            <div >Edit</div>
+          <div className="deleteEditContainer">
+            <div className="delete">Delete</div>
+            <div className="edit">Edit</div>
           </div>
         </div>
         <div className="two">
           <div>
-            <div>Area: {Organisation.Area}</div>
+            <div className="area-details">Area: {Organisation.Area}</div>
           </div> |
           <div>
-            <div>Borough: {Organisation.Borough}</div>
+            <div className="borough-details">Borough: {Organisation.Borough}</div>
           </div>
         </div>
         <div className="three">
-          <div>- {Organisation.Services}</div>
+          <div className="services">{Organisation.Services}</div>
         </div>
         {
           this.state.toggle ?
             <div style={this.state.styleOuter} >
               <div style={this.state.styleInner}>
-                <div>
-                  <div><b>Process </b></div>
-                  <div>{Organisation.Process}</div>
+                <div className="process">
+                  <div className="process-title"><strong>Process </strong></div>
+                  <div className="process-details">{Organisation.Process}</div>
                 </div>
-                <div>
-                  <div><b>Telephone </b></div>
-                  <p>{Organisation.Tel}</p>
+                <div >
+                  <div className="telephone-title"><strong>Telephone </strong></div>
+                  <div className="telephone-details">{Organisation.Tel}</div>
                 </div>
               </div>
               <div style={this.state.styleInner}>
                 <div>
-                  <div><b>Day </b></div>
-                  <div>{Organisation.Day}</div>
+                  <div className="day-title"><strong>Day </strong></div>
+                  <div className="day-details">{Organisation.Day}</div>
                 </div>
                 <div>
-                  <div><b>Email </b></div>
-                  <div>{Organisation.email}</div>
+                  <div className="email-title"><strong>Email </strong></div>
+                  <div className="email-details">{Organisation.email}</div>
                 </div>
               </div>
             </div>
