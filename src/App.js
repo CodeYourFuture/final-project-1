@@ -4,9 +4,10 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import myTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-
 import AutoComplete from 'material-ui/AutoComplete';
+
 import Header from './pages/Header';
+import Organisation from './pages/Organisation';
 import Card from './pages/Card';
 import SidebarElement from './pages/SidebarElement';
 import logoSidebar from '../public/assets/logo-sidebar.svg';
@@ -93,6 +94,7 @@ class App extends Component {
             </div>
           </div>
           <div className="Result-container">
+            <Organisation category={this.state.categoriesList} />
             {
               this.state.organisationList.map(organisation =>
                 <Card {...organisation} key={organisation.id} />)
