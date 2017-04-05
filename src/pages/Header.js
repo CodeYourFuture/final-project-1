@@ -1,21 +1,17 @@
 import React from 'react';
-import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
+import { CardTitle } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import Divider from 'material-ui/Divider';
+import Paper from 'material-ui/Paper';
 
 const Header = () => (
-  <Card style={{ height: '50px' }}>
-    <CardTitle title="Organisation Name" style={{ float: 'left' }} />
-    <CardActions style={{ float: 'left' }}>
-      <FlatButton label="+ Add New" style={{ color: 'blue' }} />
-    </CardActions>
-    <CardText style={{ float: 'right' }}>
-      Logged in as Camela
-    </CardText>
-    <CardActions style={{ float: 'right' }}>
-      <FlatButton label="Logout >" style={{ color: 'blue' }} />
-    </CardActions>
-
-  </Card>
+  <Paper style={{ height: 60, display: 'flex' }}>
+    <CardTitle title="Organisation Name" style={{ float: 'left', position: 'relative' }} />
+    <p> Logged in as Camel </p>
+    <FlatButton label="Logout >" />
+    <Divider />
+    <FlatButton label="+ Add New" />
+  </Paper>
 );
 
 export default Header;
