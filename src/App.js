@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import myTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+import AutoComplete from 'material-ui/AutoComplete';
+import Header from './pages/Header';
 import Card from './pages/Card';
 import SidebarElement from './pages/SidebarElement';
 import logoSidebar from '../public/assets/logo-sidebar.svg';
@@ -15,22 +22,39 @@ class App extends Component {
     this.state = {
       organisationList: [],
       categoriesList: [],
+      postcodeList: [],
+      searchType: '',
     };
     this.getService = this.getService.bind(this);
+    this.getSearchResult = this.getSearchResult.bind(this);
   }
 
   componentDidMount() {
-    APIs('api/organisation/category')
+    injectTapEventPlugin();
+    APIs('/api/organisation/category')
     .then(categories => this.setState({ categoriesList: categories }));
-  }
 
+    APIs('/api/organisation/postcode')
+    .then(postcodes => this.setState({ postcodeList: postcodes }));
+  }
+  getSearchResult(searchText) {
+    if (this.state.searchType === 'Postcode') {
+      const post = `?Postcode=${searchText}`;
+      APIs(`/api/organisation/search${post}`)
+      .then(organisation => this.setState({ organisationList: organisation }));
+    } else if (this.state.searchType === 'Service') {
+      const service = `?Services=${searchText}`;
+      APIs(`/api/organisation/search${service}`)
+      .then(organisation => this.setState({ organisationList: organisation }));
+    }
+  }
   getService(service) {
-    APIs(`api/organisation/category/${service}`)
+    APIs(`/api/organisation/category/${service}`)
     .then(organisation => this.setState({ organisationList: organisation }));
   }
 
   render() {
-    return (
+    return (<MuiThemeProvider muiTheme={getMuiTheme(myTheme)}>
       <div className="App">
         <div className="Sidebar">
           <img src={logoSidebar} className="HBFLogoSidebar" alt="HBFLogo" />
@@ -45,8 +69,28 @@ class App extends Component {
           <SidebarElement categories={this.state.categoriesList} service={this.getService} />
         </div>
         <div className="Container">
-          <div className="Search-container" >
-            Top Header : Search Form Content
+          <div className="Header-container" >
+            <Header />
+            <div className="Search">
+              <p>Search near </p>
+              <AutoComplete
+                hintText="Postcode"
+                filter={AutoComplete.fuzzyFilter}
+                dataSource={this.state.postcodeList}
+                maxSearchResults={5}
+                onNewRequest={this.getSearchResult}
+                onUpdateInput={() => { this.setState({ searchType: 'Postcode' }); }}
+              />
+              <p>Services </p>
+              <AutoComplete
+                hintText="Services"
+                filter={AutoComplete.fuzzyFilter}
+                dataSource={this.state.categoriesList}
+                maxSearchResults={5}
+                onNewRequest={this.getSearchResult}
+                onUpdateInput={() => { this.setState({ searchType: 'Service' }); }}
+              />
+            </div>
           </div>
           <div className="Result-container">
             {
@@ -56,6 +100,7 @@ class App extends Component {
           </div>
         </div>
       </div>
+    </MuiThemeProvider>
     );
   }
 }

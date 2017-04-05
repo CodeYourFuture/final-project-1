@@ -41,11 +41,11 @@
   text-decoration: none;
 }
 
-.Sidebar-title>a:hover{ 
+.Sidebar-title>a:hover{
   color: #f5f0f0;
 }
 
-.Sidebar-title>a:active{ 
+.Sidebar-title>a:active{
   color: #28afb0;
 }
 
@@ -90,11 +90,11 @@ button{
     z-index: -2;
 }
 
-.Sidebar-link-item:hover{ 
+.Sidebar-link-item:hover{
   color: #89d3d3;
 }
 
-.Sidebar-link-item:active{ 
+.Sidebar-link-item:active{
   color: #28afb0;
 }
 
@@ -133,7 +133,7 @@ li{
   flex-direction: column;
   margin: 10px 10px 10px 10px;
   padding: 10px 10px 10px 10px;
-  height: 70%; 
+  height: 70%;
   border: 1px solid red;
   position: relative;
 }
@@ -143,7 +143,7 @@ li{
   align-self: flex-start;
   flex-direction: column;
   align-items: left;
-  padding: 0px 2px 2px 3px;    
+  padding: 0px 2px 2px 3px;
   width: 410px;
   border-bottom: 1px solid #ddcecd;
   border-left: 1px solid #ddcecd;
@@ -166,7 +166,7 @@ li{
   font-family: 'Roboto Condensed', sans-serif;
   color: #28afb0 ;
   font-size: 22px;
-  text-align: left; 
+  text-align: left;
   margin-left: 10px;
 }
 
@@ -186,7 +186,7 @@ li{
   display: flex;
   justify-content: always;
   position: relative;
-  margin-top: 5px; 
+  margin-top: 5px;
   /*border:1px solid blue;*/
   font-size: 12px;
   color: #91938d;
@@ -204,7 +204,7 @@ li{
   justify-content: always;
   width: 100%;
   position: relative;
-  margin-top: 5px; 
+  margin-top: 5px;
   /*border:1px solid blue;*/
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
@@ -271,9 +271,62 @@ li{
 }
 
 .Result-container{
-  display: flex; 
-  flex-flow: row wrap;  
+  display: flex;
+  flex-flow: row wrap;
   justify-content: space-around;
   border: 1px solid green;
   position: relative;
 }
+/*.Container{
+  display: flex;
+  flex-direction: column;
+  margin: 10px 10px 10px 10px;
+  padding: 5px 5px 5px 5px;
+  height: 100%;
+  border: 1px solid red;
+  position: relative;
+}
+*/
+
+/*************************** Search ***********************/
+.Header-container{
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  margin-bottom: 5px;
+  position: relative;
+  width: 98%;
+  height: 95px;
+  border: 1px solid red;
+}
+
+.Search{
+  display: flex;
+  flex-flow: row wrap;
+  width: 99%;
+  margin-left: 2px;
+  border: 1px solid blue;
+}
+.Search p{
+   padding-right: 10px;
+   margin-bottom: 25px;
+   margin-left: 50px;
+}
+.Search-Fields{
+  margin-left: 10px;
+  margin-right: 10px;
+  border-bottom-color: blue;
+}
+
+.Search-Fields select{
+
+  background: transparent;
+  border: transparent;
+}
+.Search-Fields input{
+  border: transparent;
+}
+
+
+
+/*********************** End Search ***********************/
