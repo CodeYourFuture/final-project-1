@@ -73,8 +73,8 @@ class Card extends Component {
         </div>
         {
           this.state.toggle ?
-            <div style={this.state.styleOuter} >
-              <div style={this.state.styleInner}>
+            <div style={this.state.styleOuter}>
+              <div className="process-telephone-container"style={this.state.styleInner}>
                 <div className="process">
                   <div className="process-title"><strong>Process </strong></div>
                   <div className="process-details">{Organisation.Process}</div>
@@ -85,18 +85,30 @@ class Card extends Component {
                 </div>
               </div>
               <div style={this.state.styleInner}>
-                <div>
+                <div className="day-email-website-container">
                   <div className="day-title"><strong>Day </strong></div>
                   <div className="day-details">{Organisation.Day}</div>
                 </div>
                 <div>
                   <div className="email-title"><strong>Email </strong></div>
-                  <div className="email-details">{Organisation.email}</div>
+                  <a href={`mailto:${Organisation.Email}`} className="email-details">{Organisation.Email}</a>
+                </div>
+                <div>
+                  <div className="website-title"><strong>Website </strong></div>
+                  <a href={Organisation.Website}className="website-details">{Organisation.Website}
+                  </a>
                 </div>
               </div>
             </div>
         : null }
-        <div className="five">
+        <div className="notes-container">
+          <div className="notes-title"><strong>Notes</strong></div>
+          <div className="notes-details">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Nam at varius lorem, nec porta elit. Aliquam urna urna,
+          commodo sit amet enim nec, pretium ullamcorper ipsum.
+          </div>
+        </div>
+        <div className="details-expand">
           <button onClick={this.handleToggle}>{ this.state.detailText }</button>
         </div>
       </div>
