@@ -97,7 +97,7 @@ class App extends Component {
             <Organisation category={this.state.categoriesList} />
             {
               this.state.organisationList.map(organisation =>
-                <Card {...organisation} key={organisation.id} />)
+                <Card {...organisation} key={organisation._id} />)
             }
           </div>
         </div>

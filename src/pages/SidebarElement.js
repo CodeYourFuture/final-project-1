@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
+// import{Link} from 'react-router';
 
 class SidebarElement extends Component {
 
@@ -19,6 +20,7 @@ class SidebarElement extends Component {
         {
           categories.map(category => (
             <button
+              key={category}
               activeClassName="Sidebar-link-item-active"
               className="Sidebar-link-item"
               onClick={this.returnService}
