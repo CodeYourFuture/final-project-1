@@ -95,7 +95,8 @@ class Card extends Component {
                 </div>
                 <div>
                   <div className="website-title"><strong>Website </strong></div>
-                  <a href={Organisation.Website} className="website-details">{Organisation.Website}</a>
+                  <a href={Organisation.Website}className="website-details">{Organisation.Website}
+                  </a>
                 </div>
               </div>
             </div>
@@ -103,7 +104,8 @@ class Card extends Component {
         <div className="notes-container">
           <div className="notes-title"><strong>Notes</strong></div>
           <div className="notes-details">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Nam at varius lorem, nec porta elit. Aliquam urna urna, commodo sit amet enim nec, pretium ullamcorper ipsum.
+          Nam at varius lorem, nec porta elit. Aliquam urna urna,
+          commodo sit amet enim nec, pretium ullamcorper ipsum.
           </div>
         </div>
         <div className="details-expand">
