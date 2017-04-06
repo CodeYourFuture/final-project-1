@@ -91,7 +91,7 @@ class Card extends Component {
                 </div>
                 <div>
                   <div className="email-title"><strong>Email </strong></div>
-                  <div className="email-details">{Organisation.email}</div>
+                  <div className="email-details">{Organisation.Email}</div>
                 </div>
               </div>
             </div>

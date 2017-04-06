@@ -4,7 +4,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import myTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import AutoComplete from 'material-ui/AutoComplete';
 
 import Header from './pages/Header';
 import Organisation from './pages/Organisation';
@@ -25,8 +24,10 @@ class App extends Component {
       categoriesList: [],
       postcodeList: [],
       searchType: '',
+      serviceName: '',
+      displayOrgStatus: false,
     };
-    this.getService = this.getService.bind(this);
+    this.setDisplayStatus = this.setDisplayStatus.bind(this);
     this.getSearchResult = this.getSearchResult.bind(this);
   }
 
@@ -39,21 +40,30 @@ class App extends Component {
     .then(postcodes => this.setState({ postcodeList: postcodes }));
   }
   getSearchResult(searchText) {
-    if (this.state.searchType === 'Postcode') {
-      const post = `?Postcode=${searchText}`;
+    console.log(searchText[0]);
+    if (searchText[0] === 'Postcode') {
+      const post = `?Postcode=${searchText[1]}`;
       APIs(`/api/organisation/search${post}`)
       .then(organisation => this.setState({ organisationList: organisation }));
-    } else if (this.state.searchType === 'Service') {
-      const service = `?Services=${searchText}`;
+    } else if (searchText[0] === 'Service') {
+      const service = `?Services=${searchText[1]}`;
+
       APIs(`/api/organisation/search${service}`)
-      .then(organisation => this.setState({ organisationList: organisation }));
+      .then(organisation => this.setState({
+        organisationList: organisation,
+        serviceName: searchText[1],
+      }));
+    } else {
+      APIs(`/api/organisation/category/${searchText}`)
+      .then(organisation => this.setState({
+        organisationList: organisation,
+        serviceName: searchText,
+      }));
     }
   }
-  getService(service) {
-    APIs(`/api/organisation/category/${service}`)
-    .then(organisation => this.setState({ organisationList: organisation }));
+  setDisplayStatus(status) {
+    this.setState({ displayOrgStatus: status });
   }
-
   render() {
     return (<MuiThemeProvider muiTheme={getMuiTheme(myTheme)}>
       <div className="App">
@@ -67,37 +77,28 @@ class App extends Component {
             >Organisations
             </Link>
           </h3>
-          <SidebarElement categories={this.state.categoriesList} service={this.getService} />
+          <SidebarElement categories={this.state.categoriesList} service={this.getSearchResult} />
         </div>
         <div className="Container">
           <div className="Header-container" >
-            <Header />
-            <div className="Search">
-              <p>Search near </p>
-              <AutoComplete
-                hintText="Postcode"
-                filter={AutoComplete.fuzzyFilter}
-                dataSource={this.state.postcodeList}
-                maxSearchResults={5}
-                onNewRequest={this.getSearchResult}
-                onUpdateInput={() => { this.setState({ searchType: 'Postcode' }); }}
-              />
-              <p>Services </p>
-              <AutoComplete
-                hintText="Services"
-                filter={AutoComplete.fuzzyFilter}
-                dataSource={this.state.categoriesList}
-                maxSearchResults={5}
-                onNewRequest={this.getSearchResult}
-                onUpdateInput={() => { this.setState({ searchType: 'Service' }); }}
-              />
-            </div>
+            <Header
+              dataSourceServices={this.state.categoriesList}
+              dataSourcePostcode={this.state.postcodeList}
+              getSearchType={this.getSearchResult}
+              getDisplayStatus={this.setDisplayStatus}
+              serviceName={this.state.serviceName}
+              userName="Sentayhu"
+            />
           </div>
           <div className="Result-container">
-            <Organisation category={this.state.categoriesList} />
+            <Organisation
+              displayState={this.state.displayOrgStatus}
+              category={this.state.categoriesList}
+              updateDisplayStatus={this.setDisplayStatus}
+            />
             {
               this.state.organisationList.map(organisation =>
-                <Card {...organisation} key={organisation.id} />)
+                <Card {...organisation} key={organisation.Organisation} />)
             }
           </div>
         </div>
