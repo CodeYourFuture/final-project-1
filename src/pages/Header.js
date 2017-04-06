@@ -1,15 +1,14 @@
 import React from 'react';
-import { CardTitle, CardHeader } from 'material-ui/Card';
+import { CardTitle } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
 
 const Header = () => (
   <Paper style={{ height: 80 }}>
-    <div style={{ display: 'flex', justifyContent: 'space-between'}}>
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
       <CardTitle
         title="Service Name"
-        style={{ paddingBottom: 0}}
+        style={{ paddingBottom: 0 }}
       />
       <div style={{ paddingTop: 10 }}>Logged in as Camel
         <FlatButton label="Logout >" />
