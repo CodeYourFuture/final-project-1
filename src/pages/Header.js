@@ -13,7 +13,7 @@ const items = [
   <MenuItem key={3} value={3} primaryText="Wednesday" />,
   <MenuItem key={4} value={4} primaryText="Thursday" />,
   <MenuItem key={5} value={5} primaryText="Friday" />,
-  <MenuItem key={5} value={5} primaryText="Saturday" />,
+  <MenuItem key={6} value={6} primaryText="Saturday" />,
 ];
 
 class Header extends Component {
@@ -21,16 +21,25 @@ class Header extends Component {
     super(props);
     this.state = {
       searchType: '',
+      value: 0,
     };
     this.setDisplayStatus = this.setDisplayStatus.bind(this);
     this.getSearchParameter = this.getSearchParameter.bind(this);
+    this.getDayValue = this.getDayValue.bind(this);
   }
   setDisplayStatus() {
     this.props.getDisplayStatus(true);
   }
   getSearchParameter(value) {
+    console.log(this.state.searchType);
     const parameter = [this.state.searchType, value];
     this.props.getSearchType(parameter);
+  }
+  getDayValue(event, key, values) {
+    const selectedDay = event.nativeEvent.target.innerText;
+    this.setState({ searchType: 'Day' });
+    this.setState({ value: values });
+    this.getSearchParameter(selectedDay);
   }
   render() {
     const userName = this.props.userName;
@@ -68,8 +77,10 @@ class Header extends Component {
             onNewRequest={this.getSearchParameter}
             onUpdateInput={() => { this.setState({ searchType: 'Postcode' }); }}
           />
+          <p>Day </p>
           <SelectField
-            value={1}
+            value={this.state.value}
+            onChange={this.getDayValue}
           >
             {items}
           </SelectField>

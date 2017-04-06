@@ -217,23 +217,24 @@ li{
   text-indent: 10px;
 }
 
-.process-title, .day-title, .telephone-title, .email-title{
+.process-title, .day-title, .telephone-title, .email-title, .website-title, .notes-title{
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   margin-left: 10px;
   margin-top: 15px;
 }
 
-.process-details, .day-details, .telephone-details, .email-details{
+.process-details, .day-details, .telephone-details, .email-details, .website-details, .notes-details{
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   font-weight: 300;
   padding-bottom: 5px;
   padding-right: 5px;
   margin-left: 10px;
+  word-wrap:break-word;
 }
 
-.five{
+.details-expand{
   align-items: center;
   display: flex;
   justify-content: flex-end;
@@ -242,7 +243,7 @@ li{
   height: 45px;
 }
 
-.five> button{
+.details-expand> button{
   padding: 2px;
   background: transparent;
   border-color: transparent;
@@ -273,7 +274,7 @@ li{
 .Result-container{
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   border: 1px solid green;
   position: relative;
 }

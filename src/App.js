@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import myTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import Header from './pages/Header';
+import OrganisationCard from './pages/OrganisationCard';
 import Organisation from './pages/Organisation';
-import Card from './pages/Card';
 import SidebarElement from './pages/SidebarElement';
 import logoSidebar from '../public/assets/logo-sidebar.svg';
 
@@ -32,7 +31,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    injectTapEventPlugin();
     APIs('/api/organisation/category')
     .then(categories => this.setState({ categoriesList: categories }));
 
@@ -40,18 +38,22 @@ class App extends Component {
     .then(postcodes => this.setState({ postcodeList: postcodes }));
   }
   getSearchResult(searchText) {
-    console.log(searchText[0]);
     if (searchText[0] === 'Postcode') {
       const post = `?Postcode=${searchText[1]}`;
       APIs(`/api/organisation/search${post}`)
       .then(organisation => this.setState({ organisationList: organisation }));
     } else if (searchText[0] === 'Service') {
       const service = `?Services=${searchText[1]}`;
-
       APIs(`/api/organisation/search${service}`)
       .then(organisation => this.setState({
         organisationList: organisation,
         serviceName: searchText[1],
+      }));
+    } else if (searchText[0] === 'Day') {
+      const service = `?Day=${searchText[1]}`;
+      APIs(`/api/organisation/search${service}`)
+      .then(organisation => this.setState({
+        organisationList: organisation,
       }));
     } else {
       APIs(`/api/organisation/category/${searchText}`)
@@ -98,7 +100,7 @@ class App extends Component {
             />
             {
               this.state.organisationList.map(organisation =>
-                <Card {...organisation} key={organisation.Organisation} />)
+                <OrganisationCard {...organisation} key={organisation.Organisation} />)
             }
           </div>
         </div>
