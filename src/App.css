@@ -274,7 +274,7 @@ li{
 .Result-container{
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   border: 1px solid green;
   position: relative;
 }

@@ -90,12 +90,19 @@ class Card extends Component {
                   <div className="day-details">{Organisation.Day}</div>
                 </div>
                 <div>
-                  <div className="email-title"><strong>Email </strong></div>
+                  <div className="email-details">
+                    <strong>Email </strong>
+                    {Organisation.Email}
+                  </div>
                   <a href={`mailto:${Organisation.Email}`} className="email-details">{Organisation.Email}</a>
                 </div>
                 <div>
                   <div className="website-title"><strong>Website </strong></div>
-                  <a href={Organisation.Website}className="website-details">{Organisation.Website}
+                  <a
+                    href={Organisation.Website}
+                    className="website-details"
+                  >
+                    {Organisation.Website}
                   </a>
                 </div>
               </div>
