@@ -23,10 +23,16 @@ const User = new Schema({
   Role: String,
 }, { versionKey: false });
 
+const Service = new Schema({
+  Service: String,
+}, { versionKey: false });
+
+const Services = mongoose.model('Service', Service);
 const Users = mongoose.model('User', User);
 const Organisation = mongoose.model('organisation', organisationSchema);
 
 module.exports = {
   AllOrganisation: Organisation,
   User: Users,
+  Service: Services,
 };

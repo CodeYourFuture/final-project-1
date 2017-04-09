@@ -7,15 +7,6 @@ import AutoComplete from 'material-ui/AutoComplete';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
-const items = [
-  <MenuItem key={1} value={1} primaryText="Monday" />,
-  <MenuItem key={2} value={2} primaryText="Tuesday" />,
-  <MenuItem key={3} value={3} primaryText="Wednesday" />,
-  <MenuItem key={4} value={4} primaryText="Thursday" />,
-  <MenuItem key={5} value={5} primaryText="Friday" />,
-  <MenuItem key={6} value={6} primaryText="Saturday" />,
-];
-
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -31,14 +22,13 @@ class Header extends Component {
     this.props.getDisplayStatus(true);
   }
   getSearchParameter(value) {
-    console.log(this.state.searchType);
     const parameter = [this.state.searchType, value];
     this.props.getSearchType(parameter);
   }
-  getDayValue(event, key, values) {
-    const selectedDay = event.nativeEvent.target.innerText;
+  getDayValue(event, values) {
     this.setState({ searchType: 'Day' });
     this.setState({ value: values });
+    const selectedDay = event.target.innerText;
     this.getSearchParameter(selectedDay);
   }
   render() {
@@ -46,6 +36,8 @@ class Header extends Component {
     const serviceName = this.props.serviceName;
     const serviceData = this.props.dataSourceServices;
     const postcodeData = this.props.dataSourcePostcode;
+    const days = this.props.dataSourceDays;
+
     return (
       <Paper style={{ height: 80 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -57,6 +49,7 @@ class Header extends Component {
             <FlatButton
               label="Logout >"
               primary
+              labelStyle={{ fontWeight: 'bold' }}
             />
           </div>
         </div>
@@ -65,10 +58,11 @@ class Header extends Component {
           onClick={this.setDisplayStatus}
           style={{ top: 0, left: 2 }}
           primary
+          labelStyle={{ fontWeight: 'bold' }}
         />
         <Divider />
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <p>Search near </p>
+          <p className="Paragraph">Search near </p>
           <AutoComplete
             hintText="Postcode"
             filter={AutoComplete.fuzzyFilter}
@@ -77,14 +71,16 @@ class Header extends Component {
             onNewRequest={this.getSearchParameter}
             onUpdateInput={() => { this.setState({ searchType: 'Postcode' }); }}
           />
-          <p>Day </p>
+          <p className="Paragraph">Day </p>
           <SelectField
             value={this.state.value}
             onChange={this.getDayValue}
           >
-            {items}
+            {
+              days.map((day, index) => <MenuItem key={day} value={index} primaryText={day} />)
+            }
           </SelectField>
-          <p>Services </p>
+          <p className="Paragraph">Services </p>
           <AutoComplete
             hintText="Services"
             filter={AutoComplete.fuzzyFilter}

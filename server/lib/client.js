@@ -3,16 +3,20 @@ import fs from 'fs';
 import OrganisationSchema from './organisationSchema';
 
 const migrateData = () => {
-  const importedFilePath = path.resolve(__dirname, '..', '../data', 'organisation.json');
-  const importedData = fs.readFileSync(importedFilePath);
+  const importedFilePath1 = path.resolve(__dirname, '..', '../data', 'organisation.json');
+  const importedFilePath2 = path.resolve(__dirname, '..', '../data', 'service.json');
+  const importedData1 = fs.readFileSync(importedFilePath1);
+  const importedData2 = fs.readFileSync(importedFilePath2);
   let orgaisationModel;
+  let serviceModel;
   const userModel = new OrganisationSchema.User({
     userName: 'Robot',
     Email: 'user@gmail.com',
     Role: 'Administrator',
   });
   userModel.save();
-  return JSON.parse(importedData).map((organisation) => {
+  /* Import Organisation data*/
+  JSON.parse(importedData1).map((organisation) => {
     orgaisationModel = new OrganisationSchema.AllOrganisation(organisation);
     orgaisationModel.save((error) => {
       if (error) {
@@ -21,16 +25,21 @@ const migrateData = () => {
     });
     return organisation;
   });
+  /* Import services*/
+  return JSON.parse(importedData2).map((service) => {
+    serviceModel = new OrganisationSchema.Service(service);
+    serviceModel.save((error) => {
+      if (error) {
+        throw error;
+      }
+    });
+    return service;
+  });
 };
 
 const saveOrganisation = (queryStatement) => {
   const organisationModel = new OrganisationSchema.AllOrganisation(queryStatement);
-  return organisationModel.save((error) => {
-    if (error) {
-      throw error;
-    }
-    return true;
-  });
+  return organisationModel.save();
 };
 
 const excuteQuery = queryStatement =>
@@ -69,6 +78,11 @@ OrganisationSchema.AllOrganisation
 .distinct(queryStatement)
 .sort();
 
+const services = () =>
+OrganisationSchema.Service
+.distinct('Service')
+.sort();
+
 const organisation = queryStatement =>
 excuteQuery(OrganisationSchema.AllOrganisation.find(queryStatement)
 .limit(4)
@@ -82,7 +96,7 @@ module.exports = {
   getImport: migrateData,
   getAllOrganisation: allOrganisation,
   getUsers: users,
-  getCategories: distinctData,
+  getServices: services,
   getOrganisation: organisation,
   getPostcode: postCode,
   getSearchedOrganisation: organisation,

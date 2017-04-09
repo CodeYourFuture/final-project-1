@@ -16,16 +16,21 @@ console.log('Connected to mongo');
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
 app.set('views', path.join(process.cwd(), 'views'));
 app.set('view engine', 'hbs');
 
 app.get('/api/migrate', routes.getImport);
 app.get('/api/all/organisation', routes.getAllOrganisation);
-app.get('/api/organisation/category', routes.getCategory);
-app.get('/api/organisation/category/:category', routes.getOrganisation);
+app.get('/api/organisation/services', routes.getServices);
+app.get('/api/organisation/services/:service', routes.getOrganisation);
 app.get('/api/all/users', routes.getUsers);
 app.get('/api/organisation/postcode', routes.getPostcode);
 app.get('/api/organisation/search', routes.getSearchedOrganisation);
