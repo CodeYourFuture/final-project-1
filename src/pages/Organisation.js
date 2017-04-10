@@ -140,7 +140,9 @@ class Organisation extends Component {
   }
 
   render() {
-    const { category, dataSourceArea, dataSourceBorough, dataSourceDays } = this.props;
+    const { category, dataSourceArea,
+            dataSourceBorough, dataSourceDays,
+          } = this.props;
     const { valueDay } = this.state;
     const actionsButtons = [
       <FlatButton
@@ -200,13 +202,13 @@ class Organisation extends Component {
           onChange={this.setDayValue}
         >
           {
-            dataSourceDays.map(name => (
+            dataSourceDays.map(day => (
               <MenuItem
-                key={name}
+                key={day}
                 insetChildren
-                checked={valueDay && valueDay.includes(name)}
-                value={name}
-                primaryText={name}
+                checked={valueDay && valueDay.includes(day)}
+                value={day}
+                primaryText={day}
               />))
           }
         </SelectField>
@@ -335,7 +337,6 @@ class Organisation extends Component {
           </Dialog>
 
           <Snackbar
-            style={{ postion: 'relative' }}
             open={this.state.open}
             message="New organisation Added"
             autoHideDuration={5000}
