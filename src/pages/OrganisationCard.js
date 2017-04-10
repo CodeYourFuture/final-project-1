@@ -12,7 +12,6 @@ const styles = {
 const styles2 = {
   width: 410,
   margin: 5,
-  alignSelf: 'flex-start',
 };
 const detailStyle = {
   subtitleStyle: {
@@ -85,20 +84,31 @@ class OrganisationCard extends Component {
             />
           </div>
           <a
-            style={{ marginLeft: 15 }}
+            style={{ marginLeft: 15, width: 200 }}
             href={`${Organisation.Website}`}
             target="blank"
           >{Organisation.Website}
           </a>
         </CardText>
         <div style={{ float: 'left' }}>
-          <FlatButton label="Delete" primary />
-          <FlatButton label="Edit" primary />
+          <FlatButton
+            label="Delete"
+            primary
+            labelStyle={{ fontWeight: 'bold' }}
+          />
+          <FlatButton
+            label="Edit"
+            primary
+            labelStyle={{ fontWeight: 'bold' }}
+          />
         </div>
         <FlatButton
           label={this.state.detailText}
+          backgroundColor={'#37392e'}
+          hoverColor={'#89d3d3'}
           style={{ float: 'right' }}
           onClick={this.handleExpand}
+          labelStyle={{ fontWeight: 'bold', color: 'white' }}
         />
       </Card>
     );

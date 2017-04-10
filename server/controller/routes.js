@@ -9,13 +9,13 @@ module.exports = {
     const allOrganisation = clientRequest.getAllOrganisation();
     allOrganisation.then(orgData => res.status(200).json({ data: orgData }));
   },
-  getCategory(req, res) {
-    const categories = clientRequest.getCategories('Category');
-    categories.then(category => res.status(200).json({ data: category }));
+  getServices(req, res) {
+    const services = clientRequest.getServices();
+    services.then(service => res.status(200).json({ data: service }));
   },
   getOrganisation(req, res) {
-    const categoryName = req.params.category;
-    const organisations = clientRequest.getOrganisation({ Category: categoryName });
+    const serviceName = new RegExp(req.params.service, 'i');
+    const organisations = clientRequest.getOrganisation({ Category: serviceName });
     organisations.then(organisation => res.status(200).json({ data: organisation }));
   },
   getUsers(req, res) {
@@ -28,10 +28,10 @@ module.exports = {
     postcodes.then(codes => res.status(200).json({ data: codes }));
   },
   getSearchedOrganisation(req, res) {
-    const postCode = new RegExp(req.query.Postcode, 'i');
-    const day = new RegExp(req.query.Day, 'i');
-    const services = new RegExp(req.query.Services, 'i');
-    const queryStatement = { $and: [{ Postcode: postCode }, { Day: day }, { Services: services }] };
+    const postCode = new RegExp(req.query.postcode, 'i');
+    const day = new RegExp(req.query.day, 'i');
+    const services = new RegExp(req.query.service, 'i');
+    const queryStatement = { $and: [{ Postcode: postCode }, { Day: day }, { Category: services }] };
     const organisations = clientRequest.getSearchedOrganisation(queryStatement);
     organisations.then(organisation => res.status(200).json({ data: organisation }));
   },
@@ -46,11 +46,10 @@ module.exports = {
   postOrganisation(req, res) {
     const organisation = req.body;
     const saveStatus = clientRequest.saveOrganisationData(organisation);
-    if (saveStatus) {
-      res.status(200).json({ Success: 'Saved Succesfully' });
-    } else {
-      res.status(500).json({ Success: 'Not Saved Succesfully' });
-    }
+    saveStatus.then(() =>
+      res.sendStatus(200))
+    .catch(() =>
+      res.sendStatus(500));
   },
   putOrganisation(req, res) {
     const query = req.body;

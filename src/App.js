@@ -9,10 +9,16 @@ import OrganisationCard from './pages/OrganisationCard';
 import Organisation from './pages/Organisation';
 import SidebarElement from './pages/SidebarElement';
 import logoSidebar from '../public/assets/logo-sidebar.svg';
+import APIs from './APIs';
 
-const APIs = URL => fetch(URL)
-  .then(response => response.json())
-  .then(data => data.data);
+const weekDays = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
 
 class App extends Component {
 
@@ -20,8 +26,10 @@ class App extends Component {
     super(props);
     this.state = {
       organisationList: [],
-      categoriesList: [],
+      serviceList: [],
       postcodeList: [],
+      areaData: [],
+      boroughData: [],
       searchType: '',
       serviceName: '',
       displayOrgStatus: false,
@@ -31,32 +39,36 @@ class App extends Component {
   }
 
   componentDidMount() {
-    APIs('/api/organisation/category')
-    .then(categories => this.setState({ categoriesList: categories }));
+    APIs.API('/api/organisation/services')
+    .then(service => this.setState({ serviceList: service }));
 
-    APIs('/api/organisation/postcode')
+    APIs.API('/api/organisation/postcode')
     .then(postcodes => this.setState({ postcodeList: postcodes }));
   }
   getSearchResult(searchText) {
     if (searchText[0] === 'Postcode') {
-      const post = `?Postcode=${searchText[1]}`;
-      APIs(`/api/organisation/search${post}`)
-      .then(organisation => this.setState({ organisationList: organisation }));
-    } else if (searchText[0] === 'Service') {
-      const service = `?Services=${searchText[1]}`;
-      APIs(`/api/organisation/search${service}`)
+      const post = `?postcode=${searchText[1]}`;
+      APIs.API(`/api/organisation/search${post}`)
       .then(organisation => this.setState({
         organisationList: organisation,
-        serviceName: searchText[1],
+        serviceName: '',
+      }));
+    } else if (searchText[0] === 'Service') {
+      const service = `?service=${searchText[1]}`;
+      APIs.API(`/api/organisation/search${service}`)
+      .then(organisation => this.setState({
+        organisationList: organisation,
+        serviceName: '',
       }));
     } else if (searchText[0] === 'Day') {
-      const service = `?Day=${searchText[1]}`;
-      APIs(`/api/organisation/search${service}`)
+      const service = `?day=${searchText[1]}`;
+      APIs.API(`/api/organisation/search${service}`)
       .then(organisation => this.setState({
         organisationList: organisation,
+        serviceName: '',
       }));
     } else {
-      APIs(`/api/organisation/category/${searchText}`)
+      APIs.API(`/api/organisation/services/${searchText}`)
       .then(organisation => this.setState({
         organisationList: organisation,
         serviceName: searchText,
@@ -65,7 +77,16 @@ class App extends Component {
   }
   setDisplayStatus(status) {
     this.setState({ displayOrgStatus: status });
+    APIs.API('/api/organisation/area')
+    .then(area => this.setState({
+      areaData: area,
+    }));
+    APIs.API('/api/organisation/borough')
+    .then(borough => this.setState({
+      boroughData: borough,
+    }));
   }
+
   render() {
     return (<MuiThemeProvider muiTheme={getMuiTheme(myTheme)}>
       <div className="App">
@@ -79,28 +100,45 @@ class App extends Component {
             >Organisations
             </Link>
           </h3>
-          <SidebarElement categories={this.state.categoriesList} service={this.getSearchResult} />
+
+          <SidebarElement
+            categories={this.state.serviceList}
+            service={this.getSearchResult}
+          />
         </div>
         <div className="Container">
           <div className="Header-container" >
+
             <Header
-              dataSourceServices={this.state.categoriesList}
+              dataSourceServices={this.state.serviceList}
               dataSourcePostcode={this.state.postcodeList}
               getSearchType={this.getSearchResult}
               getDisplayStatus={this.setDisplayStatus}
               serviceName={this.state.serviceName}
               userName="Sentayhu"
+              dataSourceDays={weekDays}
             />
           </div>
-          <div className="Result-container">
-            <Organisation
-              displayState={this.state.displayOrgStatus}
-              category={this.state.categoriesList}
-              updateDisplayStatus={this.setDisplayStatus}
-            />
+          <div className="Result-container" >
+
+            {
+              this.state.displayOrgStatus ?
+                <Organisation
+                  displayState={this.state.displayOrgStatus}
+                  category={this.state.serviceList}
+                  updateDisplayStatus={this.setDisplayStatus}
+                  dataSourceDays={weekDays}
+                  dataSourceArea={this.state.areaData}
+                  dataSourceBorough={this.state.boroughData}
+                /> : null
+            }
+
             {
               this.state.organisationList.map(organisation =>
-                <OrganisationCard {...organisation} key={organisation.Organisation} />)
+                <OrganisationCard
+                  {...organisation}
+                  key={organisation[1]}
+                />)
             }
           </div>
         </div>
