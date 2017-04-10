@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import OrganisationSchema from './organisationSchema';
 
+/* migrate initial data to mongo db*/
 const migrateData = () => {
   const importedFilePath1 = path.resolve(__dirname, '..', '../data', 'organisation.json');
   const importedFilePath2 = path.resolve(__dirname, '..', '../data', 'service.json');
@@ -37,59 +38,69 @@ const migrateData = () => {
   });
 };
 
-const saveOrganisation = (queryStatement) => {
-  const organisationModel = new OrganisationSchema.AllOrganisation(queryStatement);
+/* Save organisation Data */
+const saveOrganisation = (organisationData) => {
+  const organisationModel = new OrganisationSchema.AllOrganisation(organisationData);
   return organisationModel.save();
 };
 
-const excuteQuery = queryStatement =>
-queryStatement.exec((error) => {
+/* Handle update and get all orgaisation data */
+const excuteQuery = runRequest =>
+runRequest.exec((error) => {
   if (error) {
     throw error;
   }
   return true;
 });
 
-const updateOrganisation = (queryStatement) => {
-  const { _id, ...rest } = queryStatement;
+/* update organisation data */
+const updateOrganisation = (organisationData) => {
+  const { _id, ...rest } = organisationData;
   const options = { new: false };
   return excuteQuery(OrganisationSchema.AllOrganisation.findByIdAndUpdate(_id, rest, options));
 };
 
-const getData = query =>
-query.exec((error, data) => {
+/* get all orgaisation data by there service*/
+const organisation = serviceType =>
+excuteQuery(OrganisationSchema.AllOrganisation.find(serviceType)
+.limit(20)
+.sort('Organisation'));
+
+/* excute request return organisation data */
+const getData = request =>
+request.exec((error, data) => {
   if (error) {
     throw error;
   }
   return data;
 });
 
+/* return all organisation data */
 const allOrganisation = () =>
 getData(OrganisationSchema.AllOrganisation.find()
-.limit(2)
+.limit(20)
 .sort('Organisation'));
 
+/* return all system users except DB id */
 const users = () =>
 getData(OrganisationSchema.User.find()
 .select('-_id'));
 
-const distinctData = queryStatement =>
+/* get distinct data */
+const distinctData = fieldName =>
 OrganisationSchema.AllOrganisation
-.distinct(queryStatement)
+.distinct(fieldName)
 .sort();
 
+/* get all service as category */
 const services = () =>
 OrganisationSchema.Service
 .distinct('Service')
 .sort();
 
-const organisation = queryStatement =>
-excuteQuery(OrganisationSchema.AllOrganisation.find(queryStatement)
-.limit(4)
-.sort('Organisation'));
-
-const postCode = queryStatement =>
-getData(OrganisationSchema.AllOrganisation.find(queryStatement)
+/* get all distict postcode */
+const postCode = fieldName =>
+getData(OrganisationSchema.AllOrganisation.find(fieldName)
 .distinct('Postcode'));
 
 module.exports = {

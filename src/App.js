@@ -19,10 +19,6 @@ const weekDays = [
   'Friday',
   'Saturday',
 ];
-/**
-const APIs = URL => fetch(URL)
-  .then(response => response.json())
-  .then(data => data.data);*/
 
 class App extends Component {
 
@@ -53,18 +49,23 @@ class App extends Component {
     if (searchText[0] === 'Postcode') {
       const post = `?postcode=${searchText[1]}`;
       APIs.API(`/api/organisation/search${post}`)
-      .then(organisation => this.setState({ organisationList: organisation }));
+      .then(organisation => this.setState({
+        organisationList: organisation,
+        serviceName: '',
+      }));
     } else if (searchText[0] === 'Service') {
       const service = `?service=${searchText[1]}`;
       APIs.API(`/api/organisation/search${service}`)
       .then(organisation => this.setState({
         organisationList: organisation,
+        serviceName: '',
       }));
     } else if (searchText[0] === 'Day') {
       const service = `?day=${searchText[1]}`;
       APIs.API(`/api/organisation/search${service}`)
       .then(organisation => this.setState({
         organisationList: organisation,
+        serviceName: '',
       }));
     } else {
       APIs.API(`/api/organisation/services/${searchText}`)
@@ -99,10 +100,15 @@ class App extends Component {
             >Organisations
             </Link>
           </h3>
-          <SidebarElement categories={this.state.serviceList} service={this.getSearchResult} />
+
+          <SidebarElement
+            categories={this.state.serviceList}
+            service={this.getSearchResult}
+          />
         </div>
         <div className="Container">
           <div className="Header-container" >
+
             <Header
               dataSourceServices={this.state.serviceList}
               dataSourcePostcode={this.state.postcodeList}
@@ -114,6 +120,7 @@ class App extends Component {
             />
           </div>
           <div className="Result-container" >
+
             {
               this.state.displayOrgStatus ?
                 <Organisation
@@ -125,9 +132,13 @@ class App extends Component {
                   dataSourceBorough={this.state.boroughData}
                 /> : null
             }
+
             {
               this.state.organisationList.map(organisation =>
-                <OrganisationCard {...organisation} key={organisation['_id']} />)
+                <OrganisationCard
+                  {...organisation}
+                  key={organisation[1]}
+                />)
             }
           </div>
         </div>

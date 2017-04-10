@@ -9,12 +9,14 @@ import Checkbox from 'material-ui/Checkbox';
 import { blue500, white } from 'material-ui/styles/colors';
 import Subheader from 'material-ui/Subheader';
 import { GridList, GridTile } from 'material-ui/GridList';
+import Snackbar from 'material-ui/Snackbar';
 import Dialog from 'material-ui/Dialog';
 import APIs from '../APIs';
 
 const style = {
   floatingLabelStyle: {
     color: '#37392e',
+    fontWeight: 'bold',
   },
   floatingLabelFocusStyle: {
     color: blue500,
@@ -25,14 +27,17 @@ class Organisation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      valueBorough: 0,
-      valueArea: 0,
-      valueDay: [],
+      valueBorough: 1,
+      valueArea: 1,
+      valueDay: ['Monday'],
+      service: '',
       area: '',
       borough: '',
       day: [],
       category: [],
       openDialog: false,
+      success: 0,
+      open: false,
     };
     this.handleCancel = this.handleCancel.bind(this);
     this.setBoroughValue = this.setBoroughValue.bind(this);
@@ -41,8 +46,12 @@ class Organisation extends Component {
     this.setDayValue = this.setDayValue.bind(this);
     this.setCategoriesValue = this.setCategoriesValue.bind(this);
     this.handelCloseDialog = this.handelCloseDialog.bind(this);
+    this.handelOpenDialog = this.handelOpenDialog.bind(this);
     this.prepareJsonData = this.prepareJsonData.bind(this);
-    this.postData = this.postData.bind(this);
+    this.postOrganisationData = this.postOrganisationData.bind(this);
+    this.setServiceValue = this.setServiceValue.bind(this);
+    this.handleSaveDialog = this.handleSaveDialog.bind(this);
+    this.handleRequestClose = this.handleRequestClose.bind(this);
   }
   setBoroughValue(event, key, value) {
     this.setState({ valueBorough: value });
@@ -55,6 +64,13 @@ class Organisation extends Component {
   setDayValue(event, index, valueDay) {
     this.setState({ valueDay });
     this.setState({ day: this.state.valueDay });
+  }
+
+  /* get and set service state */
+  setServiceValue(event) {
+    this.setState({
+      service: event.target.value,
+    });
   }
   setCategoriesValue(event) {
     if (event.target.checked) {
@@ -76,6 +92,18 @@ class Organisation extends Component {
   handelCloseDialog() {
     this.setState({ openDialog: false });
   }
+  handleSaveDialog() {
+    this.postOrganisationData();
+    this.setState({
+      openDialog: false,
+      open: true,
+    });
+  }
+  handleRequestClose() {
+    this.setState({
+      open: false,
+    });
+  }
   prepareJsonData() {
     const data = {
       Organisation: this.orgNameElement.input.value,
@@ -88,12 +116,13 @@ class Organisation extends Component {
       Tel: this.telElement.input.value,
       Process: this.processElement.input.value,
       Postcode: this.postCodeElement.input.value,
-      Services: this.serviceElement.input.value,
+      Services: this.state.service,
       Borough: this.state.borough,
     };
     return data;
   }
-  postData() {
+
+  postOrganisationData() {
     const options = {
       method: 'POST',
       body: JSON.stringify(this.prepareJsonData()),
@@ -101,13 +130,15 @@ class Organisation extends Component {
         'Content-Type': 'application/json',
       },
     };
-    console.log(this.prepareJsonData());
-    fetch('/api/organisation/post', options)
-    .then((res) => {
-      console.log(res.status);
-    })
-    .catch(() => console.log('not successful'));
+    APIs.POSTapis('/api/organisation/post', options)
+    .then(status => this.setState({
+      success: status,
+    }))
+    .catch(status => this.setState({
+      success: status,
+    }));
   }
+
   render() {
     const { category, dataSourceArea, dataSourceBorough, dataSourceDays } = this.props;
     const { valueDay } = this.state;
@@ -120,53 +151,35 @@ class Organisation extends Component {
       <FlatButton
         label="Yes"
         primary
-        onClick={this.handelCloseDialog}
+        onClick={this.handleSaveDialog}
       />,
     ];
     return (
-      <Card style={{ padding: 20, margin: 10 }}>
+      <Card style={{ padding: 20, marginLeft: 90 }}>
+
         <CardTitle title="Add New Organisation" style={{ width: 500 }} />
+
         <TextField
-          ref={field => this.orgNameElement = field}
+          ref={field => (this.orgNameElement = field)}
           hintText="Type text..."
           floatingLabelText="Organisation name"
           floatingLabelFixed
           floatingLabelStyle={style.floatingLabelStyle}
           floatingLabelFocusStyle={style.floatingLabelFocusStyle}
-          errorText="This field is required."
           onChange={this.handleTextValue}
         />
-        <SelectField
-          value={this.state.valueArea}
-          floatingLabelText="Area"
-          floatingLabelStyle={style.floatingLabelStyle}
-          floatingLabelFocusStyle={style.floatingLabelFocusStyle}
-          errorText="This field is required."
-          onChange={this.setAreaValue}
-        >
-          {
-            dataSourceArea.map((area, index) =>
-              <MenuItem key={area} value={index} primaryText={area} />)
-          }
-        </SelectField>
 
-        <SelectField
-          value={this.state.valueBorough}
-          floatingLabelText="Borough"
-          floatingLabelStyle={style.floatingLabelStyle}
-          floatingLabelFocusStyle={style.floatingLabelFocusStyle}
-          errorText="This field is required."
-          onChange={this.setBoroughValue}
-        >
-          {
-            dataSourceBorough.map((borough, index) =>
-              <MenuItem key={borough} value={index} primaryText={borough} />)
-          }
-        </SelectField>
-
-        <Divider />
         <TextField
-          ref={field => this.processElement = field}
+          ref={field => (this.postCodeElement = field)}
+          hintText="Type text..."
+          floatingLabelText="Postcode"
+          floatingLabelFixed
+          floatingLabelStyle={style.floatingLabelStyle}
+          floatingLabelFocusStyle={style.floatingLabelFocusStyle}
+        />
+
+        <TextField
+          ref={field => (this.processElement = field)}
           id="process"
           hintText="Type text..."
           floatingLabelText="Process"
@@ -174,10 +187,16 @@ class Organisation extends Component {
           floatingLabelStyle={style.floatingLabelStyle}
           floatingLabelFocusStyle={style.floatingLabelFocusStyle}
         />
+
+        <Divider />
+
         <SelectField
           multiple
-          hintText="Select a Day"
           value={valueDay}
+          floatingLabelText="Day"
+          floatingLabelStyle={style.floatingLabelStyle}
+          floatingLabelFocusStyle={style.floatingLabelFocusStyle}
+
           onChange={this.setDayValue}
         >
           {
@@ -191,56 +210,81 @@ class Organisation extends Component {
               />))
           }
         </SelectField>
-        <TextField
-          ref={field => this.postCodeElement = field}
-          hintText="Type text..."
-          floatingLabelText="Postcode"
-          floatingLabelFixed
+
+        <SelectField
+          value={this.state.valueArea}
+          floatingLabelText="Area"
           floatingLabelStyle={style.floatingLabelStyle}
           floatingLabelFocusStyle={style.floatingLabelFocusStyle}
-          errorText="This field is required."
-        />
+          maxHeight={400}
+          onChange={this.setAreaValue}
+        >
+          {
+            dataSourceArea.map((area, index) =>
+              <MenuItem key={area} value={index} primaryText={area} />)
+          }
+        </SelectField>
+
+        <SelectField
+          value={this.state.valueBorough}
+          floatingLabelText="Borough"
+          floatingLabelStyle={style.floatingLabelStyle}
+          floatingLabelFocusStyle={style.floatingLabelFocusStyle}
+          maxHeight={400}
+          onChange={this.setBoroughValue}
+        >
+          {
+            dataSourceBorough.map((borough, index) =>
+              <MenuItem key={borough} value={index} primaryText={borough} />)
+          }
+        </SelectField>
+
         <Divider />
+
         <TextField
-          ref={field => this.websiteElement = field}
+          ref={field => (this.websiteElement = field)}
           hintText="http://"
           floatingLabelText="Website"
           floatingLabelFixed
           floatingLabelStyle={style.floatingLabelStyle}
           floatingLabelFocusStyle={style.floatingLabelFocusStyle}
         />
+
         <TextField
-          ref={field => this.telElement = field}
+          ref={field => (this.telElement = field)}
           hintText="Type text..."
           floatingLabelText="Telephone"
           floatingLabelFixed
           floatingLabelStyle={style.floatingLabelStyle}
           floatingLabelFocusStyle={style.floatingLabelFocusStyle}
-          errorText="This field is required."
         />
+
         <TextField
-          ref={field => this.emailElement = field}
+          ref={field => (this.emailElement = field)}
           hintText="Type text..."
           floatingLabelText="E-mail"
           floatingLabelFixed
           floatingLabelStyle={style.floatingLabelStyle}
           floatingLabelFocusStyle={style.floatingLabelFocusStyle}
-          errorText="This field is required."
         />
-        <Divider style={{ display: 'flex' }} />
+
+        <Divider />
+
         <TextField
-          ref={field => this.serviceElement = field}
           hintText="Type text..."
           floatingLabelText="Services"
           multiLine
           rows={5}
           floatingLabelStyle={style.floatingLabelStyle}
           floatingLabelFocusStyle={style.floatingLabelFocusStyle}
-          errorText="This field is required."
+          value={this.state.service}
+          onChange={this.setServiceValue}
         />
 
         <div style={{ float: 'right', marginRight: 20, border: blue500 }}>
+
           <Subheader>Categories</Subheader>
+
           <GridList
             cellHeight={20}
             style={{ width: 300, height: 100, overflowY: 'auto' }}
@@ -256,10 +300,12 @@ class Organisation extends Component {
                     />
                   </GridTile>)
               }
-
           </GridList>
+
         </div>
+
         <Divider />
+
         <CardActions style={{ float: 'right' }}>
           <FlatButton
             label="Cancel"
@@ -269,6 +315,7 @@ class Organisation extends Component {
             onClick={this.handleCancel}
             labelStyle={{ fontWeight: 'bold' }}
           />
+
           <FlatButton
             label="Save"
             backgroundColor="#28afb0"
@@ -277,6 +324,7 @@ class Organisation extends Component {
             labelStyle={{ fontWeight: 'bold' }}
             onClick={this.handelOpenDialog}
           />
+
           <Dialog
             actions={actionsButtons}
             modal={false}
@@ -284,7 +332,15 @@ class Organisation extends Component {
             onRequestClose={this.handelCloseDialog}
           >
             Are you sure you want to save ?
-        </Dialog>
+          </Dialog>
+
+          <Snackbar
+            style={{ postion: 'relative' }}
+            open={this.state.open}
+            message="New organisation Added"
+            autoHideDuration={5000}
+            onRequestClose={this.handleRequestClose}
+          />
         </CardActions>
       </Card>
     );

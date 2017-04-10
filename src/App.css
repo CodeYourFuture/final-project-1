@@ -125,7 +125,6 @@ li{
   width: 100%;
   height: 50px;
   margin: 10px;
-  border: 1px solid red;
 }
 
 .Container{
@@ -134,7 +133,6 @@ li{
   margin: 10px 10px 10px 10px;
   padding: 10px 10px 10px 10px;
   height: 70%;
-  border: 1px solid red;
   position: relative;
 }
 
@@ -279,7 +277,6 @@ li{
   display: flex;
   flex-flow: wrap;
   justify-content: space-between;
-  border: 1px solid green;
   position: relative;
 }
 /*.Container{
@@ -302,7 +299,6 @@ li{
   position: relative;
   width: 98%;
   height: 120px;
-  border: 1px solid red;
 }
 
 .Search{
@@ -310,7 +306,7 @@ li{
   flex-flow: row wrap;
   width: 99%;
   margin-left: 2px;
-  border: 1px solid blue;
+  height: auto;
 }
 .Search p{
    padding-right: 10px;
@@ -320,7 +316,6 @@ li{
 .Search-Fields{
   margin-left: 10px;
   margin-right: 10px;
-  border-bottom-color: blue;
 }
 
 .Search-Fields select{
