@@ -35,10 +35,11 @@ class Organisation extends Component {
       borough: '',
       category: [],
       openDialog: false,
-      success: 0,
+      success: '',
       open: false,
       confirmMsg: '',
       errorText: '',
+      successMark: '',
     };
     this.handleCancel = this.handleCancel.bind(this);
     this.setBoroughValue = this.setBoroughValue.bind(this);
@@ -92,7 +93,8 @@ class Organisation extends Component {
     if (this.state.valueDay.length === 0 || this.state.area.length === 0
       || this.state.valueBorough === -1 || this.state.valueArea === -1
       || this.telElement.input.value.length === 0
-      || this.postCodeElement.input.value.length === 0) {
+      || this.postCodeElement.input.value.length === 0
+      || this.state.category.length === 0) {
       this.setState({ errorText: 'This filed required' });
     } else {
       this.setState({ errorText: '' }, () => {
@@ -117,6 +119,7 @@ class Organisation extends Component {
     this.setState({
       open: true,
       confirmMsg: 'New organisation is Added',
+      successMark: this.state.success,
     });
   }
   prepareJsonData() {
@@ -361,9 +364,10 @@ class Organisation extends Component {
           <Snackbar
             open={this.state.open}
             message={this.state.confirmMsg}
+            action={this.state.successMark}
             autoHideDuration={5000}
             onRequestClose={this.confirmationMsgClose}
-            style={{ top: 0 }}
+            style={{ top: 10 }}
           />
         </CardActions>
       </Card>
