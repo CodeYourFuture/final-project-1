@@ -33,42 +33,43 @@ class App extends Component {
       searchType: '',
       serviceName: '',
       displayOrgStatus: false,
+      title: '',
     };
     this.setDisplayStatus = this.setDisplayStatus.bind(this);
     this.getSearchResult = this.getSearchResult.bind(this);
   }
 
   componentDidMount() {
-    APIs.API('/api/organisation/services')
+    APIs.GetAPI('/api/organisation/services')
     .then(service => this.setState({ serviceList: service }));
 
-    APIs.API('/api/organisation/postcode')
+    APIs.GetAPI('/api/organisation/postcode')
     .then(postcodes => this.setState({ postcodeList: postcodes }));
   }
   getSearchResult(searchText) {
     if (searchText[0] === 'Postcode') {
       const post = `?postcode=${searchText[1]}`;
-      APIs.API(`/api/organisation/search${post}`)
+      APIs.GetAPI(`/api/organisation/search${post}`)
       .then(organisation => this.setState({
         organisationList: organisation,
         serviceName: '',
       }));
     } else if (searchText[0] === 'Service') {
       const service = `?service=${searchText[1]}`;
-      APIs.API(`/api/organisation/search${service}`)
+      APIs.GetAPI(`/api/organisation/search${service}`)
       .then(organisation => this.setState({
         organisationList: organisation,
         serviceName: '',
       }));
     } else if (searchText[0] === 'Day') {
       const service = `?day=${searchText[1]}`;
-      APIs.API(`/api/organisation/search${service}`)
+      APIs.GetAPI(`/api/organisation/search${service}`)
       .then(organisation => this.setState({
         organisationList: organisation,
         serviceName: '',
       }));
     } else {
-      APIs.API(`/api/organisation/services/${searchText}`)
+      APIs.GetAPI(`/api/organisation/services/${searchText}`)
       .then(organisation => this.setState({
         organisationList: organisation,
         serviceName: searchText,
@@ -76,15 +77,19 @@ class App extends Component {
     }
   }
   setDisplayStatus(status) {
-    this.setState({ displayOrgStatus: status });
-    APIs.API('/api/organisation/area')
-    .then(area => this.setState({
-      areaData: area,
-    }));
-    APIs.API('/api/organisation/borough')
-    .then(borough => this.setState({
-      boroughData: borough,
-    }));
+    this.setState({
+      displayOrgStatus: status,
+      title: 'Exsisting Organisation',
+    }, () => {
+      APIs.GetAPI('/api/organisation/area')
+      .then(area => this.setState({
+        areaData: area,
+      }));
+      APIs.GetAPI('/api/organisation/borough')
+      .then(borough => this.setState({
+        boroughData: borough,
+      }));
+    });
   }
 
   render() {
@@ -132,7 +137,7 @@ class App extends Component {
                   dataSourceBorough={this.state.boroughData}
                 /> : null
             }
-
+            <h3>{this.state.title}</h3>
             {
               this.state.organisationList.map(organisation =>
                 <OrganisationCard

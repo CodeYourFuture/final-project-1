@@ -12,7 +12,7 @@ class Header extends Component {
     super(props);
     this.state = {
       searchType: '',
-      value: 0,
+      value: -1,
     };
     this.setDisplayStatus = this.setDisplayStatus.bind(this);
     this.getSearchParameter = this.getSearchParameter.bind(this);
@@ -27,9 +27,10 @@ class Header extends Component {
   }
   getDayValue(event, values) {
     this.setState({ searchType: 'Day' });
-    this.setState({ value: values });
-    const selectedDay = event.target.innerText;
-    this.getSearchParameter(selectedDay);
+    this.setState({ value: values }, () => {
+      const selectedDay = event.target.innerText;
+      this.getSearchParameter(selectedDay);
+    });
   }
   render() {
     const userName = this.props.userName;

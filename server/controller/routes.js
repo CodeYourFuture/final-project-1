@@ -47,9 +47,9 @@ module.exports = {
     const organisation = req.body;
     const saveStatus = clientRequest.saveOrganisationData(organisation);
     saveStatus.then(() =>
-      res.sendStatus(200))
+      res.status(200))
     .catch(() =>
-      res.sendStatus(500));
+      res.status(500));
   },
   putOrganisation(req, res) {
     const query = req.body;

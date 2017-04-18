@@ -27,17 +27,18 @@ class Organisation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      valueBorough: 1,
-      valueArea: 1,
-      valueDay: ['Monday'],
+      valueBorough: -1,
+      valueArea: -1,
+      valueDay: [],
       service: '',
       area: '',
       borough: '',
-      day: [],
       category: [],
       openDialog: false,
       success: 0,
       open: false,
+      confirmMsg: '',
+      errorText: '',
     };
     this.handleCancel = this.handleCancel.bind(this);
     this.setBoroughValue = this.setBoroughValue.bind(this);
@@ -51,26 +52,27 @@ class Organisation extends Component {
     this.postOrganisationData = this.postOrganisationData.bind(this);
     this.setServiceValue = this.setServiceValue.bind(this);
     this.handleSaveDialog = this.handleSaveDialog.bind(this);
-    this.handleRequestClose = this.handleRequestClose.bind(this);
+    this.confirmationMsgClose = this.confirmationMsgClose.bind(this);
+    this.confirmationMsgOpen = this.confirmationMsgOpen.bind(this);
   }
   setBoroughValue(event, key, value) {
-    this.setState({ valueBorough: value });
-    this.setState({ borough: event.target.innerText });
+    this.setState({ valueBorough: value }, () => {
+      this.setState({ borough: event.target.innerText });
+    });
   }
   setAreaValue(event, key, value) {
-    this.setState({ valueArea: value });
-    this.setState({ area: event.target.innerText });
+    this.setState({ valueArea: value }, () => {
+      this.setState({ area: event.target.innerText });
+    });
   }
   setDayValue(event, index, valueDay) {
-    this.setState({ valueDay });
-    this.setState({ day: this.state.valueDay });
+    this.setState({ valueDay }, () => {
+      this.setState({ day: this.state.valueDay });
+    });
   }
-
   /* get and set service state */
   setServiceValue(event) {
-    this.setState({
-      service: event.target.value,
-    });
+    this.setState({ service: event.target.value });
   }
   setCategoriesValue(event) {
     if (event.target.checked) {
@@ -87,21 +89,34 @@ class Organisation extends Component {
     this.props.updateDisplayStatus(false);
   }
   handelOpenDialog() {
-    this.setState({ openDialog: true });
+    if (this.state.valueDay.length === 0 || this.state.area.length === 0
+      || this.state.valueBorough === -1 || this.state.valueArea === -1
+      || this.telElement.input.value.length === 0
+      || this.postCodeElement.input.value.length === 0) {
+      this.setState({ errorText: 'This filed required' });
+    } else {
+      this.setState({ errorText: '' }, () => {
+        this.setState({ openDialog: true });
+      });
+    }
   }
   handelCloseDialog() {
     this.setState({ openDialog: false });
   }
   handleSaveDialog() {
+    this.handelCloseDialog();
     this.postOrganisationData();
-    this.setState({
-      openDialog: false,
-      open: true,
-    });
+    this.confirmationMsgOpen();
   }
-  handleRequestClose() {
+  confirmationMsgClose() {
     this.setState({
       open: false,
+    });
+  }
+  confirmationMsgOpen() {
+    this.setState({
+      open: true,
+      confirmMsg: 'New organisation is Added',
     });
   }
   prepareJsonData() {
@@ -112,7 +127,7 @@ class Organisation extends Component {
       Category: this.state.category,
       Email: this.emailElement.input.value,
       Website: this.websiteElement.input.value,
-      Day: this.state.day,
+      Day: this.state.valueDay,
       Tel: this.telElement.input.value,
       Process: this.processElement.input.value,
       Postcode: this.postCodeElement.input.value,
@@ -130,13 +145,13 @@ class Organisation extends Component {
         'Content-Type': 'application/json',
       },
     };
-    APIs.POSTapis('/api/organisation/post', options)
+    APIs.PostAPI('/api/organisation/post', options)
     .then(status => this.setState({
       success: status,
+    }, () => {
+      this.confirmationMsgOpen();
     }))
-    .catch(status => this.setState({
-      success: status,
-    }));
+    .catch(status => status);
   }
 
   render() {
@@ -168,6 +183,7 @@ class Organisation extends Component {
           floatingLabelFixed
           floatingLabelStyle={style.floatingLabelStyle}
           floatingLabelFocusStyle={style.floatingLabelFocusStyle}
+          errorText={this.state.errorText}
           onChange={this.handleTextValue}
         />
 
@@ -178,6 +194,7 @@ class Organisation extends Component {
           floatingLabelFixed
           floatingLabelStyle={style.floatingLabelStyle}
           floatingLabelFocusStyle={style.floatingLabelFocusStyle}
+          errorText={this.state.errorText}
         />
 
         <TextField
@@ -188,6 +205,7 @@ class Organisation extends Component {
           floatingLabelFixed
           floatingLabelStyle={style.floatingLabelStyle}
           floatingLabelFocusStyle={style.floatingLabelFocusStyle}
+          errorText={this.state.errorText}
         />
 
         <Divider />
@@ -196,9 +214,10 @@ class Organisation extends Component {
           multiple
           value={valueDay}
           floatingLabelText="Day"
+          floatingLabelFixed
           floatingLabelStyle={style.floatingLabelStyle}
           floatingLabelFocusStyle={style.floatingLabelFocusStyle}
-
+          errorText={this.state.errorText}
           onChange={this.setDayValue}
         >
           {
@@ -220,6 +239,7 @@ class Organisation extends Component {
           floatingLabelFocusStyle={style.floatingLabelFocusStyle}
           maxHeight={400}
           onChange={this.setAreaValue}
+          errorText={this.state.errorText}
         >
           {
             dataSourceArea.map((area, index) =>
@@ -234,6 +254,7 @@ class Organisation extends Component {
           floatingLabelFocusStyle={style.floatingLabelFocusStyle}
           maxHeight={400}
           onChange={this.setBoroughValue}
+          errorText={this.state.errorText}
         >
           {
             dataSourceBorough.map((borough, index) =>
@@ -259,6 +280,7 @@ class Organisation extends Component {
           floatingLabelFixed
           floatingLabelStyle={style.floatingLabelStyle}
           floatingLabelFocusStyle={style.floatingLabelFocusStyle}
+          errorText={this.state.errorText}
         />
 
         <TextField
@@ -338,9 +360,10 @@ class Organisation extends Component {
 
           <Snackbar
             open={this.state.open}
-            message="New organisation Added"
+            message={this.state.confirmMsg}
             autoHideDuration={5000}
-            onRequestClose={this.handleRequestClose}
+            onRequestClose={this.confirmationMsgClose}
+            style={{ top: 0 }}
           />
         </CardActions>
       </Card>

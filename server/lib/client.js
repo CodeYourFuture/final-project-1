@@ -41,7 +41,12 @@ const migrateData = () => {
 /* Save organisation Data */
 const saveOrganisation = (organisationData) => {
   const organisationModel = new OrganisationSchema.AllOrganisation(organisationData);
-  return organisationModel.save();
+  return organisationModel.save((error, organisation, affectedRow) => {
+    if (error) {
+      throw error;
+    }
+    return affectedRow;
+  });
 };
 
 /* Handle update and get all orgaisation data */
