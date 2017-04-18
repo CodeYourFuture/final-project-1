@@ -8,6 +8,12 @@ dependencies:
   cache_directories:
     - ~/.cache/yarn
 
+deployment:
+  production:
+    branch: autodeployment
+    commands:    
+      - ./script/trigger.sh
+
 test:
   override:
     - yarn lint
