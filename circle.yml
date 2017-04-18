@@ -10,7 +10,7 @@ dependencies:
 
 deployment:
   production:
-    branch: autodeployment
+    branch: master 
     commands:    
       - ./script/trigger.sh
 
