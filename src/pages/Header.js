@@ -44,7 +44,7 @@ class Header extends Component {
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <CardTitle
             title={serviceName}
-            style={{ paddingBottom: 0 }}
+            style={{ padding: 1 }}
           />
           <div style={{ paddingTop: 10 }}>Logged in as {userName}
             <FlatButton
@@ -57,7 +57,7 @@ class Header extends Component {
         <FlatButton
           label="+ Add New"
           onClick={this.setDisplayStatus}
-          style={{ top: 0, left: 2 }}
+          style={{ marginBottom: 3, left: 2 }}
           primary
           labelStyle={{ fontWeight: 'bold' }}
         />

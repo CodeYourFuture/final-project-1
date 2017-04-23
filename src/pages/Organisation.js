@@ -34,7 +34,7 @@ class Organisation extends Component {
       area: '',
       borough: '',
       category: [],
-      openDialog: false,
+      openUserPrompt: false,
       success: 0,
       open: false,
       confirmMsg: '',
@@ -46,8 +46,8 @@ class Organisation extends Component {
     this.setBoroughValue = this.setBoroughValue.bind(this);
     this.setDayValue = this.setDayValue.bind(this);
     this.setCategoriesValue = this.setCategoriesValue.bind(this);
-    this.handleCloseDialog = this.handleCloseDialog.bind(this);
-    this.handleOpenDialog = this.handleOpenDialog.bind(this);
+    this.handleCloseUserPrompt = this.handleCloseUserPrompt.bind(this);
+    this.handlUserPrompt = this.handlUserPrompt.bind(this);
     this.prepareJsonData = this.prepareJsonData.bind(this);
     this.postOrganisationData = this.postOrganisationData.bind(this);
     this.setServiceValue = this.setServiceValue.bind(this);
@@ -89,7 +89,7 @@ class Organisation extends Component {
   handleCancel() {
     this.props.updateDisplayStatus(false);
   }
-  handleOpenDialog() {
+  handlUserPrompt() {
     if (this.state.valueDay.length === 0 || this.state.area.length === 0
       || this.state.valueBorough === -1 || this.state.valueArea === -1
       || this.telElement.input.value.length === 0
@@ -97,15 +97,15 @@ class Organisation extends Component {
       this.setState({ errorText: 'This filed required' });
     } else {
       this.setState({ errorText: '' }, () => {
-        this.setState({ openDialog: true });
+        this.setState({ openUserPrompt: true });
       });
     }
   }
-  handleCloseDialog() {
-    this.setState({ openDialog: false });
+  handleCloseUserPrompt() {
+    this.setState({ openUserPrompt: false });
   }
   handleSaveDialog() {
-    this.handelCloseDialog();
+    this.handleCloseUserPrompt();
     this.postOrganisationData();
     this.confirmationMsgOpen();
   }
@@ -173,9 +173,9 @@ class Organisation extends Component {
       />,
     ];
     return (
-      <Card style={{ padding: 20, marginLeft: 90 }}>
+      <Card style={{ padding: 10, marginLeft: 90 }}>
 
-        <CardTitle title="Add New Organisation" style={{ width: 500 }} />
+        <CardTitle title="Add New Organisation" style={{ width: 500, padding: 1 }} />
 
         <TextField
           ref={field => (this.orgNameElement = field)}
@@ -340,21 +340,19 @@ class Organisation extends Component {
             onClick={this.handleCancel}
             labelStyle={{ fontWeight: 'bold' }}
           />
-
           <FlatButton
             label="Save"
             backgroundColor="#28afb0"
             hoverColor="#8AA62F"
             style={{ width: 150, color: white }}
+            onClick={this.handlUserPrompt}
             labelStyle={{ fontWeight: 'bold' }}
-            onClick={this.handelOpenDialog}
           />
-
           <Dialog
             actions={actionsButtons}
             modal={false}
-            open={this.state.openDialog}
-            onRequestClose={this.handelCloseDialog}
+            open={this.state.openUserPrompt}
+            onRequestClose={this.handleCloseUserPrompt}
           >
             Are you sure you want to save ?
           </Dialog>

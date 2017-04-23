@@ -127,7 +127,7 @@ class App extends Component {
               getSearchType={this.getSearchResult}
               getDisplayStatus={this.setDisplayStatus}
               serviceName={this.state.serviceName}
-              userName="Sentayhu"
+              userName="Alex"
               dataSourceDays={weekDays}
             />
           </div>
