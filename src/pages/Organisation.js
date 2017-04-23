@@ -46,8 +46,8 @@ class Organisation extends Component {
     this.setBoroughValue = this.setBoroughValue.bind(this);
     this.setDayValue = this.setDayValue.bind(this);
     this.setCategoriesValue = this.setCategoriesValue.bind(this);
-    this.handelCloseDialog = this.handelCloseDialog.bind(this);
-    this.handelOpenDialog = this.handelOpenDialog.bind(this);
+    this.handleCloseDialog = this.handleCloseDialog.bind(this);
+    this.handleOpenDialog = this.handleOpenDialog.bind(this);
     this.prepareJsonData = this.prepareJsonData.bind(this);
     this.postOrganisationData = this.postOrganisationData.bind(this);
     this.setServiceValue = this.setServiceValue.bind(this);
