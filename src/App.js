@@ -49,12 +49,11 @@ class App extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.params.category !== nextProps.params.category){
-      this.getSearchResult(nextProps.params.category)
+    if (this.props.params.category !== nextProps.params.category) {
+      this.getSearchResult(nextProps.params.category);
     }
-    
   }
-  
+
   getSearchResult(searchText) {
     if (searchText[0] === 'Postcode') {
       const post = `?postcode=${searchText[1]}`;
