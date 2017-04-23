@@ -55,6 +55,7 @@ class Organisation extends Component {
     this.confirmationMsgClose = this.confirmationMsgClose.bind(this);
     this.confirmationMsgOpen = this.confirmationMsgOpen.bind(this);
   }
+
   setBoroughValue(event, key, value) {
     this.setState({ valueBorough: value }, () => {
       this.setState({ borough: event.target.innerText });
@@ -88,7 +89,7 @@ class Organisation extends Component {
   handleCancel() {
     this.props.updateDisplayStatus(false);
   }
-  handelOpenDialog() {
+  handleOpenDialog() {
     if (this.state.valueDay.length === 0 || this.state.area.length === 0
       || this.state.valueBorough === -1 || this.state.valueArea === -1
       || this.telElement.input.value.length === 0
@@ -100,7 +101,7 @@ class Organisation extends Component {
       });
     }
   }
-  handelCloseDialog() {
+  handleCloseDialog() {
     this.setState({ openDialog: false });
   }
   handleSaveDialog() {

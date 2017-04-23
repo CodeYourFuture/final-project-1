@@ -5,11 +5,11 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import Header from './pages/Header';
-import OrganisationCard from './pages/OrganisationCard';
 import Organisation from './pages/Organisation';
 import SidebarElement from './pages/SidebarElement';
 import logoSidebar from '../public/assets/logo-sidebar.svg';
 import APIs from './APIs';
+import OrganisationCard from './pages/OrganisationCard';
 
 const weekDays = [
   'Monday',
@@ -18,6 +18,7 @@ const weekDays = [
   'Thursday',
   'Friday',
   'Saturday',
+  'Sunday',
 ];
 
 class App extends Component {
@@ -37,6 +38,13 @@ class App extends Component {
     };
     this.setDisplayStatus = this.setDisplayStatus.bind(this);
     this.getSearchResult = this.getSearchResult.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(this.props.params.category !== nextProps.params.category){
+      this.getSearchResult(nextProps.params.category)
+    }
+    
   }
 
   componentDidMount() {
@@ -99,7 +107,7 @@ class App extends Component {
           <img src={logoSidebar} className="HBFLogoSidebar" alt="HBFLogo" />
           <h3 className="Sidebar-title">
             <Link
-              to="/organisations/all"
+              to="/organisations"
               activeClassName="Sidebar-title-item-active"
               className="Sidebar-title-item"
             >Organisations
@@ -108,7 +116,6 @@ class App extends Component {
 
           <SidebarElement
             categories={this.state.serviceList}
-            service={this.getSearchResult}
           />
         </div>
         <div className="Container">
