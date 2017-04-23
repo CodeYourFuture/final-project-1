@@ -40,13 +40,6 @@ class App extends Component {
     this.getSearchResult = this.getSearchResult.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if(this.props.params.category !== nextProps.params.category){
-      this.getSearchResult(nextProps.params.category)
-    }
-    
-  }
-
   componentDidMount() {
     APIs.GetAPI('/api/organisation/services')
     .then(service => this.setState({ serviceList: service }));
@@ -54,6 +47,14 @@ class App extends Component {
     APIs.GetAPI('/api/organisation/postcode')
     .then(postcodes => this.setState({ postcodeList: postcodes }));
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.params.category !== nextProps.params.category){
+      this.getSearchResult(nextProps.params.category)
+    }
+    
+  }
+  
   getSearchResult(searchText) {
     if (searchText[0] === 'Postcode') {
       const post = `?postcode=${searchText[1]}`;

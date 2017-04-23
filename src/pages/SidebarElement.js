@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import '../App.css';
-import{Link} from 'react-router';
 
 class SidebarElement extends Component {
   render() {
@@ -9,7 +9,8 @@ class SidebarElement extends Component {
       <div className="Sidebar-link">
         {
           categories.map(category => (
-            <Link to={`/organisations/${category}`}
+            <Link
+              to={`/organisations/${category}`}
               key={category}
               className="Sidebar-link-item"
               value={category}

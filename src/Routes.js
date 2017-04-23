@@ -8,7 +8,7 @@ class Routes extends Component {
       <Router history={browserHistory}>
         <Route path="/" component={App}>
           <Route path="organisations" component={App} />
-          <Route path="organisations/:category" component={App}/>
+          <Route path="organisations/:category" component={App} />
         </Route>
       </Router>
     );
