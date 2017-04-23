@@ -1,32 +1,22 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import '../App.css';
-// import{Link} from 'react-router';
 
 class SidebarElement extends Component {
-
-  constructor(props) {
-    super(props);
-    this.returnService = this.returnService.bind(this);
-  }
-
-  returnService(event) {
-    this.props.service(event.target.value);
-  }
-
   render() {
     const categories = this.props.categories;
     return (
       <div className="Sidebar-link">
         {
           categories.map(category => (
-            <button
+            <Link
+              to={`/organisations/${category}`}
               key={category}
               className="Sidebar-link-item"
-              onClick={this.returnService}
               value={category}
             >
               {category}
-            </button>))
+            </Link>))
         }
       </div>
     );
