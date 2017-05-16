@@ -9,7 +9,7 @@ import Organisation from './pages/Organisation';
 import SidebarElement from './pages/SidebarElement';
 import logoSidebar from '../public/assets/logo-sidebar.svg';
 import APIs from './APIs';
-import OrganisationCard from './pages/OrganisationCard';
+import Card from './pages/Card';
 
 const weekDays = [
   'Monday',
@@ -147,7 +147,7 @@ class App extends Component {
             <h3>{this.state.title}</h3>
             {
               this.state.organisationList.map(organisation =>
-                <OrganisationCard
+                <Card
                   {...organisation}
                   key={organisation[1]}
                 />)
