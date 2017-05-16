@@ -20,6 +20,7 @@ const organisationSchema = new Schema({
 const User = new Schema({
   userName: String,
   Email: String,
+  password: String,
   Role: String,
 }, { versionKey: false });
 
