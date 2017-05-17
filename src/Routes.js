@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Router, Route, browserHistory } from 'react-router';
 import App from './App';
-import login from './pages/login';
+// import login from './pages/login';
 
 class Routes extends Component {
   render() {
