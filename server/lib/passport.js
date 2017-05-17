@@ -27,10 +27,10 @@ module.exports = (passport) => {
   passport.use('local-signup', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
     usernameField: 'email',
-    passwordField: 'Role',
+    passwordField: 'Password',
     passReqToCallback: true,
   },
-  (req, email, Role, done) => {
+  (req, email, Password, done) => {
     if (email) {
       email = email.toLowerCase();
     }
@@ -51,8 +51,7 @@ module.exports = (passport) => {
           // create the user
           const newUser = new Schema.User();
           newUser.Email = email; // pull the first email
-          newUser.Role = Role.toLowerCase();
-
+          newUser.password = Password;
           newUser.save((errs) => {
             if (errs) {
               return done(err);
