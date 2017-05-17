@@ -80,8 +80,8 @@ app.use((req, res, next) => {
 });
 
 app.get('/', routes.getDashBoard);
-app.get('/signup', routes.getSignUp);
-app.get('/login', routes.getlogin);
+app.post('/signup', routes.getSignUp);
+app.post('/login', routes.getlogin);
 app.get('/api/migrate', routes.getImport);
 app.get('/api/all/organisation', routes.getAllOrganisation);
 app.get('/api/organisation/services', routes.getServices);
