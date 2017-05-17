@@ -1,6 +1,15 @@
 import clientRequest from '../lib/client';
 
 module.exports = {
+  getDashBoard(req, res) {
+    res.render('index');
+  },
+  getSignUp(req, res) {
+    res.render('signup');
+  },
+  getlogin(req, res) {
+    res.render('login');
+  },
   getImport(req, res) {
     const importedData = clientRequest.getImport();
     res.status(200).json(importedData);

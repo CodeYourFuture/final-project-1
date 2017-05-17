@@ -144,7 +144,7 @@ class App extends Component {
                   dataSourceBorough={this.state.boroughData}
                 /> : null
             }
-            <h3>{this.state.title}</h3>
+            {/*<h3>{this.state.title}</h3>*/}
             {
               this.state.organisationList.map(organisation =>
                 <Card
