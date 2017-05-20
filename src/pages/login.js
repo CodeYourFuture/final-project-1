@@ -4,7 +4,6 @@ import APIs from '../APIs';
 
 // import LogoHomePage from '../public/assets/logo-homepage.svg'
 
-
 class Login extends Component {
   constructor(props) {
     super(props);
