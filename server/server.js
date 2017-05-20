@@ -7,7 +7,7 @@ import expressValidator from 'express-validator';
 import flash from 'connect-flash';
 import session from 'express-session';
 import passport from 'passport';
-// import localStrategy from 'passport-local';
+import localStrategy from 'passport-local';
 import path from 'path';
 import routes from './controller/routes';
 
@@ -50,6 +50,7 @@ app.use(session({
 // Passport init
 app.use(passport.initialize());
 app.use(passport.session());
+require('./lib/passport.js')(passport);//add this line
 
 // express validator
 app.use(expressValidator({
@@ -81,7 +82,13 @@ app.use((req, res, next) => {
 
 app.get('/', routes.getDashBoard);
 app.post('/signup', routes.getSignUp);
-app.post('/login', routes.getlogin);
+// app.post('/login', routes.getlogin);
+app.post('/login',
+  passport.authenticate('local-login'),
+  function (req, res) {
+    console.log('I am here suffering')
+    res.redirect('/home/')
+  } )
 app.get('/api/migrate', routes.getImport);
 app.get('/api/all/organisation', routes.getAllOrganisation);
 app.get('/api/organisation/services', routes.getServices);

@@ -347,6 +347,45 @@ li{
   border: transparent;
 }
 
-
-
 /*********************** End Search ***********************/
+
+/**********************Dashboard/Login Page************/
+.login-container{
+  background: grey;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  text-align: center;
+
+}
+
+.login-dashboard{
+  background-image: url('/assets/selected-arrow.svg');
+  background: transparent;
+  width: 410px;
+  height: auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.email-container{
+  text-align: center;
+}
+
+.title-dashboard {
+   font-family: 'Roboto Condensed', sans-serif;
+   text-align: center;
+  }
+  
+.subtitle-dashboard{
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.form-control {
+    width: 280px;
+    height: 30px;
+    font-size: 18px;
+    border-radius: 5px;
+}
+/*************************End Dashboard/Login*************/
