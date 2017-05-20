@@ -7,7 +7,7 @@ import expressValidator from 'express-validator';
 import flash from 'connect-flash';
 import session from 'express-session';
 import passport from 'passport';
-import localStrategy from 'passport-local';
+//import localStrategy from 'passport-local';
 import path from 'path';
 import routes from './controller/routes';
 
@@ -86,9 +86,9 @@ app.post('/signup', routes.getSignUp);
 app.post('/login',
   passport.authenticate('local-login'),
   function (req, res) {
-    console.log('I am here suffering')
+    console.log('Where are you!!');
     res.redirect('/home/')
-  } )
+  });
 app.get('/api/migrate', routes.getImport);
 app.get('/api/all/organisation', routes.getAllOrganisation);
 app.get('/api/organisation/services', routes.getServices);

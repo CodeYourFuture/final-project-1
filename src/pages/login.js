@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+/*import React, { Component } from 'react';
 import '../App.css';
 import APIs from '../APIs';
 
@@ -59,4 +59,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Login;*/
