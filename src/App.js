@@ -9,7 +9,6 @@ import Organisation from './pages/Organisation';
 import SidebarElement from './pages/SidebarElement';
 import logoSidebar from '../public/assets/logo-sidebar.svg';
 import APIs from './APIs';
-// import OrganisationCard from './pages/OrganisationCard';
 import Card from './pages/Card';
 
 const weekDays = [
@@ -43,10 +42,10 @@ class App extends Component {
 
   componentDidMount() {
     APIs.GetAPI('/api/organisation/services')
-    .then(service => this.setState({ serviceList: service }));
+      .then(service => this.setState({ serviceList: service }));
 
     APIs.GetAPI('/api/organisation/postcode')
-    .then(postcodes => this.setState({ postcodeList: postcodes }));
+      .then(postcodes => this.setState({ postcodeList: postcodes }));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -59,30 +58,30 @@ class App extends Component {
     if (searchText[0] === 'Postcode') {
       const post = `?postcode=${searchText[1]}`;
       APIs.GetAPI(`/api/organisation/search${post}`)
-      .then(organisation => this.setState({
-        organisationList: organisation,
-        serviceName: '',
-      }));
+        .then(organisation => this.setState({
+          organisationList: organisation,
+          serviceName: '',
+        }));
     } else if (searchText[0] === 'Service') {
       const service = `?service=${searchText[1]}`;
       APIs.GetAPI(`/api/organisation/search${service}`)
-      .then(organisation => this.setState({
-        organisationList: organisation,
-        serviceName: '',
-      }));
+        .then(organisation => this.setState({
+          organisationList: organisation,
+          serviceName: '',
+        }));
     } else if (searchText[0] === 'Day') {
       const service = `?day=${searchText[1]}`;
       APIs.GetAPI(`/api/organisation/search${service}`)
-      .then(organisation => this.setState({
-        organisationList: organisation,
-        serviceName: '',
-      }));
+        .then(organisation => this.setState({
+          organisationList: organisation,
+          serviceName: '',
+        }));
     } else {
       APIs.GetAPI(`/api/organisation/services/${searchText}`)
-      .then(organisation => this.setState({
-        organisationList: organisation,
-        serviceName: searchText,
-      }));
+        .then(organisation => this.setState({
+          organisationList: organisation,
+          serviceName: searchText,
+        }));
     }
   }
   setDisplayStatus(status) {
@@ -91,13 +90,13 @@ class App extends Component {
       title: 'Exsisting Organisation',
     }, () => {
       APIs.GetAPI('/api/organisation/area')
-      .then(area => this.setState({
-        areaData: area,
-      }));
+        .then(area => this.setState({
+          areaData: area,
+        }));
       APIs.GetAPI('/api/organisation/borough')
-      .then(borough => this.setState({
-        boroughData: borough,
-      }));
+        .then(borough => this.setState({
+          boroughData: borough,
+        }));
     });
   }
 
@@ -128,7 +127,7 @@ class App extends Component {
               getSearchType={this.getSearchResult}
               getDisplayStatus={this.setDisplayStatus}
               serviceName={this.state.serviceName}
-              userName="Alex"
+              userName="Pablo"
               dataSourceDays={weekDays}
             />
           </div>
@@ -145,7 +144,7 @@ class App extends Component {
                   dataSourceBorough={this.state.boroughData}
                 /> : null
             }
-            <h3>{this.state.title}</h3>
+            {<h3>{this.state.title}</h3>}
             {
               this.state.organisationList.map(organisation =>
                 <Card
