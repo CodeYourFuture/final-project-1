@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs';
-import OrganisationSchema from './organisationSchema';
+import Model from '../models/dbModel';
 
 /* migrate initial data to mongo db*/
 const migrateData = () => {
@@ -10,16 +10,16 @@ const migrateData = () => {
   const importedData2 = fs.readFileSync(importedFilePath2);
   let orgaisationModel;
   let serviceModel;
-  const userModel = new OrganisationSchema.User({
+  const user = new Model.User({
     userName: 'Robot',
     Email: 'user@gmail.com',
     Role: 'Administrator',
   });
-  userModel.save();
+  user.save();
   /* Import Organisation data*/
   JSON.parse(importedData1).map((organisation) => {
-    orgaisationModel = new OrganisationSchema.AllOrganisation(organisation);
-    orgaisationModel.save((error) => {
+    orgaisation = new Model.AllOrganisation(organisation);
+    orgaisation.save((error) => {
       if (error) {
         throw error;
       }
@@ -28,8 +28,8 @@ const migrateData = () => {
   });
   /* Import services*/
   return JSON.parse(importedData2).map((service) => {
-    serviceModel = new OrganisationSchema.Service(service);
-    serviceModel.save((error) => {
+    service = new Model.Service(service);
+    service.save((error) => {
       if (error) {
         throw error;
       }
@@ -40,8 +40,8 @@ const migrateData = () => {
 
 /* Save organisation Data */
 const saveOrganisation = (organisationData) => {
-  const organisationModel = new OrganisationSchema.AllOrganisation(organisationData);
-  return organisationModel.save((error, organisation, affectedRow) => {
+  const organisation = new Model.AllOrganisation(organisationData);
+  return organisation.save((error, organisation, affectedRow) => {
     if (error) {
       throw error;
     }
@@ -62,12 +62,12 @@ runRequest.exec((error) => {
 const updateOrganisation = (organisationData) => {
   const { _id, ...rest } = organisationData;
   const options = { new: false };
-  return excuteQuery(OrganisationSchema.AllOrganisation.findByIdAndUpdate(_id, rest, options));
+  return excuteQuery(Model.AllOrganisation.findByIdAndUpdate(_id, rest, options));
 };
 
 /* get all orgaisation data by there service*/
 const organisation = serviceType =>
-excuteQuery(OrganisationSchema.AllOrganisation.find(serviceType)
+excuteQuery(Model.AllOrganisation.find(serviceType)
 .limit(20)
 .sort('Organisation'));
 
@@ -82,30 +82,30 @@ request.exec((error, data) => {
 
 /* return all organisation data */
 const allOrganisation = () =>
-getData(OrganisationSchema.AllOrganisation.find()
+getData(Model.AllOrganisation.find()
 .limit(20)
 .sort('Organisation'));
 
 /* return all system users except DB id */
 const users = () =>
-getData(OrganisationSchema.User.find()
+getData(Model.User.find()
 .select('-_id'));
 
 /* get distinct data */
 const distinctData = fieldName =>
-OrganisationSchema.AllOrganisation
+Model.AllOrganisation
 .distinct(fieldName)
 .sort();
 
 /* get all service as category */
 const services = () =>
-OrganisationSchema.Service
+Model.Service
 .distinct('Service')
 .sort();
 
 /* get all distict postcode */
 const postCode = fieldName =>
-getData(OrganisationSchema.AllOrganisation.find(fieldName)
+getData(Model.AllOrganisation.find(fieldName)
 .distinct('Postcode'));
 
 module.exports = {
