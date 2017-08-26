@@ -1,42 +1,4 @@
-import path from 'path';
-import fs from 'fs';
 import Model from '../models/dbModel';
-
-/* migrate initial data to mongo db*/
-const migrateData = () => {
-  const importedFilePath1 = path.resolve(__dirname, '..', '../data', 'organisation.json');
-  const importedFilePath2 = path.resolve(__dirname, '..', '../data', 'service.json');
-  const importedData1 = fs.readFileSync(importedFilePath1);
-  const importedData2 = fs.readFileSync(importedFilePath2);
-  let orgaisationModel;
-  let serviceModel;
-  const user = new Model.User({
-    userName: 'Robot',
-    Email: 'user@gmail.com',
-    Role: 'Administrator',
-  });
-  user.save();
-  /* Import Organisation data*/
-  JSON.parse(importedData1).map((organisation) => {
-    orgaisation = new Model.AllOrganisation(organisation);
-    orgaisation.save((error) => {
-      if (error) {
-        throw error;
-      }
-    });
-    return organisation;
-  });
-  /* Import services*/
-  return JSON.parse(importedData2).map((service) => {
-    service = new Model.Service(service);
-    service.save((error) => {
-      if (error) {
-        throw error;
-      }
-    });
-    return service;
-  });
-};
 
 /* Save organisation Data */
 const saveOrganisation = (organisationData) => {
@@ -109,7 +71,6 @@ getData(Model.AllOrganisation.find(fieldName)
 .distinct('Postcode'));
 
 module.exports = {
-  getImport: migrateData,
   getAllOrganisation: allOrganisation,
   getUsers: users,
   getServices: services,

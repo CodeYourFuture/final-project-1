@@ -1,10 +1,6 @@
 import persistance from './persistance';
 
 module.exports = {
-  getImport(req, res) {
-    const importedData = persistance.getImport();
-    res.status(200).json(importedData);
-  },
   getAllOrganisation(req, res) {
     const orgList = persistance.getAllOrganisation();
     orgList.then(list => res.status(200).json({ data: list }));
