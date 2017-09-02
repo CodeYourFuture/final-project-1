@@ -139,6 +139,7 @@ class Organisation extends Component {
   }
 
   postOrganisationData() {
+    console.log(this.prepareJsonData())
     const options = {
       method: 'POST',
       body: JSON.stringify(this.prepareJsonData()),
