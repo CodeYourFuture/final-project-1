@@ -23,6 +23,7 @@ app.use((req, res, next) => {
 
 // set static folder
 app.use(express.static(path.join(__dirname, 'public')));
+app.get('/api/migrate', routes.getImport);
 app.get('/api/all/organisation', routes.getAllOrganisation);
 app.get('/api/organisation/services', routes.getServices);
 app.get('/api/organisation/services/:service', routes.getOrganisation);
