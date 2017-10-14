@@ -5,8 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import Header from './pages/Header';
-//import Organisation from './pages/Organisation';
-import FormContainer from './components/form_components/Form_container';
+import Organisation from './pages/Organisation';
 import SidebarElement from './pages/SidebarElement';
 import logoSidebar from '../public/assets/logo-sidebar.svg';
 import APIs from './APIs';
@@ -133,11 +132,18 @@ class App extends Component {
               dataSourceDays={weekDays}
             />
           </div>
-          <div className="result-container" >
+          <div className="Result-container" >
 
             {
               this.state.displayOrgStatus ?
-                <FormContainer/> : null
+                <Organisation
+                  displayState={this.state.displayOrgStatus}
+                  category={this.state.serviceList}
+                  updateDisplayStatus={this.setDisplayStatus}
+                  dataSourceDays={weekDays}
+                  dataSourceArea={this.state.areaData}
+                  dataSourceBorough={this.state.boroughData}
+                /> : null
             }
             <h3>{this.state.title}</h3>
             {
